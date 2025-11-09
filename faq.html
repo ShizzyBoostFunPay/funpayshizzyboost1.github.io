@@ -1,0 +1,2766 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ShizzyBoost - Премиум услуги FunPay</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-black: #0a0a0a;
+            --secondary-black: #1a1a1a;
+            --accent-black: #2a2a2a;
+            --primary-red: #e50914;
+            --secondary-red: #b2070f;
+            --accent-red: #ff2e2e;
+            --text-white: #f5f5f5;
+            --text-gray: #a0a0a0;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--primary-black);
+            color: var(--text-white);
+            overflow-x: hidden;
+        }
+
+        /* Стили для премиум анимаций */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes fadeInRight {
+            from {
+                opacity: 0;
+                transform: translateX(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        @keyframes glow {
+            0% {
+                box-shadow: 0 0 5px var(--primary-red);
+            }
+            50% {
+                box-shadow: 0 0 20px var(--accent-red);
+            }
+            100% {
+                box-shadow: 0 0 5px var(--primary-red);
+            }
+        }
+
+        .animated {
+            opacity: 0;
+            transition: opacity 0.8s, transform 0.8s;
+        }
+
+        .fade-in-up {
+            animation: fadeInUp 1s ease-out forwards;
+        }
+
+        .fade-in-left {
+            animation: fadeInLeft 1s ease-out forwards;
+        }
+
+        .fade-in-right {
+            animation: fadeInRight 1s ease-out forwards;
+        }
+
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+
+        .glow {
+            animation: glow 3s infinite;
+        }
+
+        /* Навигация */
+      header {
+            background-color: rgba(10, 10, 10, 0.9);
+            position: fixed;
+            width: 100%;
+            z-index: 1000;
+            padding: 1rem 0;
+            box-shadow: 0 2px 10px rgba(229, 9, 20, 0.3);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: var(--text-white);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+
+        .logo span {
+            color: var(--primary-red);
+        }
+
+        .logo i {
+            margin-right: 0.5rem;
+            color: var(--primary-red);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-links li {
+            margin-left: 2rem;
+        }
+
+        .nav-links a {
+            color: var(--text-white);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-red);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--primary-red);
+            transition: width 0.3s;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+           .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(rgba(10, 10, 10, 0.8), rgba(10, 10, 10, 0.9)), url('https://images.unsplash.com/photo-1542751371-adc38448a05e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80') no-repeat center center/cover;
+            text-align: center;
+            padding: 0 2rem;
+        }
+
+        .hero-content {
+            max-width: 800px;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            text-shadow: 0 0 10px rgba(229, 9, 20, 0.5);
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            color: var(--text-gray);
+        }
+
+        .cta-button {
+            display: inline-block;
+            background-color: var(--primary-red);
+            color: var(--text-white);
+            padding: 0.8rem 2rem;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.1rem;
+            transition: all 0.3s;
+            border: 2px solid var(--primary-red);
+        }
+
+        .cta-button:hover {
+            background-color: transparent;
+            color: var(--primary-red);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(229, 9, 20, 0.3);
+        }
+
+        /* Секции */
+        section {
+            padding: 5rem 2rem;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+            position: relative;
+        }
+
+        .section-title h2 {
+            font-size: 2.5rem;
+            display: inline-block;
+            position: relative;
+        }
+
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background-color: var(--primary-red);
+        }
+        /* FAQ секция */
+        .faq {
+            background-color: var(--secondary-black);
+        }
+
+        .faq-container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .faq-item {
+            background-color: var(--accent-black);
+            border-radius: 10px;
+            margin-bottom: 1.5rem;
+            overflow: hidden;
+            transition: all 0.3s;
+            border: 1px solid transparent;
+        }
+
+        .faq-item:hover {
+            border-color: var(--primary-red);
+            box-shadow: 0 5px 15px rgba(229, 9, 20, 0.2);
+        }
+
+        .faq-question {
+            padding: 1.5rem 2rem;
+            font-size: 1.2rem;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.3s;
+        }
+
+        .faq-question:hover {
+            color: var(--primary-red);
+        }
+
+        .faq-question i {
+            transition: transform 0.3s;
+        }
+
+        .faq-answer {
+            padding: 0 2rem;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease, padding 0.5s ease;
+            color: var(--text-gray);
+            line-height: 1.6;
+        }
+
+        .faq-item.active .faq-answer {
+            padding: 0 2rem 1.5rem;
+            max-height: 500px;
+        }
+
+        .faq-item.active .faq-question i {
+            transform: rotate(180deg);
+        }
+
+        /* Категории FAQ */
+        .faq-categories {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-bottom: 3rem;
+        }
+
+        .category-btn {
+            background-color: var(--accent-black);
+            color: var(--text-white);
+            border: 2px solid transparent;
+            padding: 0.7rem 1.5rem;
+            border-radius: 30px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+
+        .category-btn:hover {
+            border-color: var(--primary-red);
+            color: var(--primary-red);
+        }
+
+        .category-btn.active {
+            background-color: var(--primary-red);
+            color: var(--text-white);
+        }
+
+        /* Дополнительная помощь */
+        .help-section {
+            background-color: var(--primary-black);
+        }
+
+        .help-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .help-card {
+            background-color: var(--secondary-black);
+            border-radius: 10px;
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.3s;
+            border: 1px solid transparent;
+        }
+
+        .help-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--primary-red);
+            box-shadow: 0 10px 30px rgba(229, 9, 20, 0.2);
+        }
+
+        .help-icon {
+            font-size: 3rem;
+            color: var(--primary-red);
+            margin-bottom: 1.5rem;
+        }
+
+        .help-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .help-card p {
+            color: var(--text-gray);
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+
+        .help-button {
+            display: inline-block;
+            background-color: transparent;
+            color: var(--primary-red);
+            padding: 0.6rem 1.5rem;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: bold;
+            border: 2px solid var(--primary-red);
+            transition: all 0.3s;
+        }
+
+        .help-button:hover {
+            background-color: var(--primary-red);
+            color: var(--text-white);
+        }
+
+        /* Футер */
+        footer {
+            background-color: var(--secondary-black);
+            padding: 3rem 2rem 1rem;
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+        }
+
+        .footer-col h4 {
+            font-size: 1.2rem;
+            margin-bottom: 1.5rem;
+            color: var(--primary-red);
+            position: relative;
+        }
+
+        .footer-col h4::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 40px;
+            height: 2px;
+            background-color: var(--primary-red);
+        }
+
+        .footer-col p {
+            color: var(--text-gray);
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-links a {
+            color: var(--text-gray);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: var(--primary-red);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: var(--accent-black);
+            border-radius: 50%;
+            color: var(--text-white);
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .social-links a:hover {
+            background-color: var(--primary-red);
+            transform: translateY(-5px);
+        }
+
+        .copyright {
+            text-align: center;
+            margin-top: 3rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid #333;
+            color: var(--text-gray);
+            font-size: 0.9rem;
+        }
+
+        /* Адаптивность */
+        @media (max-width: 992px) {
+            .footer-container {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .faq-question {
+                padding: 1.2rem 1.5rem;
+                font-size: 1.1rem;
+            }
+            
+            .faq-answer {
+                padding: 0 1.5rem;
+            }
+            
+            .faq-item.active .faq-answer {
+                padding: 0 1.5rem 1.2rem;
+            }
+            
+            .footer-container {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+  <header>
+        <div class="nav-container">
+            <a href="#" class="logo"><i class="fas fa-rocket"></i>Shizzy<span>Boost</span></a>
+            <ul class="nav-links">
+                <li><a href="#home">Главная</a></li>
+                <li><a href="#about">Обо мне</a></li>
+                <li><a href="#services">Услуги</a></li>
+                <li><a href="#reviews">Отзывы</a></li>
+                <li><a href="#contacts">Контакты</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <!-- Герой секция -->
+    <!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Улучшенный Hero - ShizzyBoost FAQ</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-black: #0a0a0a;
+            --secondary-black: #1a1a1a;
+            --accent-black: #2a2a2a;
+            --primary-red: #e50914;
+            --secondary-red: #b2070f;
+            --accent-red: #ff2e2e;
+            --text-white: #f5f5f5;
+            --text-gray: #a0a0a0;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--primary-black);
+            color: var(--text-white);
+            overflow-x: hidden;
+        }
+
+        /* Премиум анимации */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes fadeInRight {
+            from {
+                opacity: 0;
+                transform: translateX(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+                box-shadow: 0 0 0 0 rgba(229, 9, 20, 0.7);
+            }
+            70% {
+                transform: scale(1.05);
+                box-shadow: 0 0 0 15px rgba(229, 9, 20, 0);
+            }
+            100% {
+                transform: scale(1);
+                box-shadow: 0 0 0 0 rgba(229, 9, 20, 0);
+            }
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-15px);
+            }
+        }
+
+        @keyframes glow {
+            0% {
+                text-shadow: 0 0 5px var(--primary-red);
+            }
+            50% {
+                text-shadow: 0 0 20px var(--accent-red), 0 0 30px var(--accent-red);
+            }
+            100% {
+                text-shadow: 0 0 5px var(--primary-red);
+            }
+        }
+
+        @keyframes typing {
+            from {
+                width: 0;
+            }
+            to {
+                width: 100%;
+            }
+        }
+
+        @keyframes blink {
+            50% {
+                border-color: transparent;
+            }
+        }
+
+        @keyframes particleMove {
+            0% {
+                transform: translate(0, 0);
+                opacity: 1;
+            }
+            100% {
+                transform: translate(var(--move-x), var(--move-y));
+                opacity: 0;
+            }
+        }
+
+        .animated {
+            opacity: 0;
+            transition: opacity 0.8s, transform 0.8s;
+        }
+
+        .fade-in-up {
+            animation: fadeInUp 1s ease-out forwards;
+        }
+
+        .fade-in-left {
+            animation: fadeInLeft 1s ease-out forwards;
+        }
+
+        .fade-in-right {
+            animation: fadeInRight 1s ease-out forwards;
+        }
+
+        .pulse {
+            animation: pulse 3s infinite;
+        }
+
+        .float {
+            animation: float 5s ease-in-out infinite;
+        }
+
+        .glow-text {
+            animation: glow 3s infinite;
+        }
+
+        /* Герой секция */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: 
+                radial-gradient(circle at 20% 80%, rgba(229, 9, 20, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(229, 9, 20, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 40% 40%, rgba(10, 10, 10, 0.8) 0%, transparent 50%),
+                linear-gradient(rgba(10, 10, 10, 0.9), rgba(10, 10, 10, 0.9)),
+                url('https://images.unsplash.com/photo-1542751371-adc38448a05e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80') no-repeat center center/cover;
+            text-align: center;
+            padding: 0 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Анимированные частицы */
+        .particles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background-color: var(--primary-red);
+            border-radius: 50%;
+            opacity: 0;
+            animation: particleMove 5s linear infinite;
+        }
+
+        .hero-content {
+            max-width: 900px;
+            z-index: 2;
+            position: relative;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+        }
+
+        .hero h1 .typing-text {
+            display: inline-block;
+            overflow: hidden;
+            border-right: 3px solid var(--primary-red);
+            white-space: nowrap;
+            animation: typing 3.5s steps(40, end), blink 1s step-end infinite;
+        }
+
+        .hero h1 span {
+            color: var(--primary-red);
+            position: relative;
+        }
+
+        .hero h1 span::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, var(--primary-red), transparent);
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 2.5rem;
+            color: var(--text-gray);
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .hero-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+            flex-wrap: wrap;
+        }
+
+        .cta-button {
+            display: inline-flex;
+            align-items: center;
+            background-color: var(--primary-red);
+            color: var(--text-white);
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.1rem;
+            transition: all 0.4s;
+            border: 2px solid var(--primary-red);
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.7s;
+            z-index: -1;
+        }
+
+        .cta-button:hover {
+            background-color: transparent;
+            color: var(--primary-red);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(229, 9, 20, 0.4);
+        }
+
+        .cta-button:hover::before {
+            left: 100%;
+        }
+
+        .cta-button.secondary {
+            background-color: transparent;
+            color: var(--primary-red);
+        }
+
+        .cta-button.secondary:hover {
+            background-color: var(--primary-red);
+            color: var(--text-white);
+        }
+
+        .cta-button i {
+            margin-right: 0.7rem;
+            font-size: 1.2rem;
+        }
+
+        .scroll-down {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: var(--text-gray);
+            text-decoration: none;
+            z-index: 2;
+        }
+
+        .scroll-down span {
+            margin-bottom: 10px;
+            font-size: 0.9rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .scroll-down .arrow {
+            width: 25px;
+            height: 25px;
+            border-right: 2px solid var(--primary-red);
+            border-bottom: 2px solid var(--primary-red);
+            transform: rotate(45deg);
+            animation: float 2s infinite;
+        }
+
+        .stats {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            margin-top: 3rem;
+            flex-wrap: wrap;
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 1.5rem;
+            background: rgba(26, 26, 26, 0.7);
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(229, 9, 20, 0.2);
+            transition: all 0.4s;
+            min-width: 150px;
+        }
+
+        .stat-item:hover {
+            transform: translateY(-10px);
+            border-color: var(--primary-red);
+            box-shadow: 0 10px 30px rgba(229, 9, 20, 0.3);
+        }
+
+        .stat-item i {
+            font-size: 2.5rem;
+            color: var(--primary-red);
+            margin-bottom: 1rem;
+        }
+
+        .stat-item .number {
+            font-size: 2.2rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(to right, var(--text-white), var(--primary-red));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .stat-item .label {
+            font-size: 0.9rem;
+            color: var(--text-gray);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Адаптивность */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero p {
+                font-size: 1.1rem;
+            }
+            
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .cta-button {
+                width: 100%;
+                max-width: 300px;
+                justify-content: center;
+            }
+            
+            .stats {
+                gap: 1.5rem;
+            }
+            
+            .stat-item {
+                min-width: 120px;
+                padding: 1rem;
+            }
+            
+            .stat-item .number {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Герой секция -->
+    <section class="hero">
+        <!-- Анимированные частицы -->
+        <div class="particles" id="particles-container"></div>
+        
+        <div class="hero-content">
+            <h1 class="animated fade-in-up">
+                <span class="typing-text">Часто задаваемые вопросы</span>
+            </h1>
+            <p class="animated fade-in-up" style="animation-delay: 0.3s;">
+                Найди ответы на все вопросы о наших премиум услугах бустинга и игровых ценностях. Экономь время и получай максимальный результат с ShizzyBoost!
+            </p>
+            
+            <div class="hero-buttons">
+                <a href="#faq" class="cta-button animated fade-in-left" style="animation-delay: 0.5s;">
+                    <i class="fas fa-search"></i> Найти ответ
+                </a>
+                <a href="index.html#contacts" class="cta-button secondary animated fade-in-right" style="animation-delay: 0.7s;">
+                    <i class="fas fa-headset"></i> Связаться с нами
+                </a>
+            </div>
+            
+            <div class="stats">
+                <div class="stat-item animated fade-in-left" style="animation-delay: 0.9s;">
+                    <i class="fas fa-question-circle"></i>
+                    <div class="number">50+</div>
+                    <div class="label">Отзывов</div>
+                </div>
+                <div class="stat-item animated fade-in-up" style="animation-delay: 1.1s;">
+                    <i class="fas fa-users"></i>
+                    <div class="number">500+</div>
+                    <div class="label">Клиентов</div>
+                </div>
+                <div class="stat-item animated fade-in-right" style="animation-delay: 1.3s;">
+                    <i class="fas fa-star"></i>
+                    <div class="number">4.9/5</div>
+                    <div class="label">Рейтинг</div>
+                </div>
+            </div>
+        </div>
+        
+        <a href="#faq" class="scroll-down animated fade-in-up" style="animation-delay: 1.5s;">
+            <span>Листай вниз</span>
+            <div class="arrow"></div>
+        </a>
+    </section>
+
+    <!-- Заглушка для следующей секции -->
+    <section id="faq" style="height: 0vh; padding: 2rem; display: flex; align-items: center; justify-content: center; background: var(--secondary-black);">
+        <h2 style="font-size: 0.0rem;"></h2>
+    </section>
+
+    <script>
+        // Создание анимированных частиц
+        function createParticles() {
+            const container = document.getElementById('particles-container');
+            const particleCount = 30;
+            
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.classList.add('particle');
+                
+                // Случайные начальные позиции
+                const startX = Math.random() * 100;
+                const startY = Math.random() * 100;
+                
+                // Случайное движение
+                const moveX = (Math.random() - 0.5) * 200;
+                const moveY = (Math.random() - 0.5) * 200;
+                
+                // Случайная задержка и продолжительность
+                const delay = Math.random() * 5;
+                const duration = 5 + Math.random() * 5;
+                
+                particle.style.left = `${startX}%`;
+                particle.style.top = `${startY}%`;
+                particle.style.setProperty('--move-x', `${moveX}px`);
+                particle.style.setProperty('--move-y', `${moveY}px`);
+                particle.style.animationDelay = `${delay}s`;
+                particle.style.animationDuration = `${duration}s`;
+                
+                // Случайный размер
+                const size = 2 + Math.random() * 4;
+                particle.style.width = `${size}px`;
+                particle.style.height = `${size}px`;
+                
+                // Случайная прозрачность
+                const opacity = 0.3 + Math.random() * 0.7;
+                particle.style.opacity = opacity;
+                
+                container.appendChild(particle);
+            }
+        }
+        
+        // Анимация появления элементов при загрузке
+        document.addEventListener('DOMContentLoaded', function() {
+            createParticles();
+            
+            const animatedElements = document.querySelectorAll('.animated');
+            
+            animatedElements.forEach((element, index) => {
+                // Установка задержки для каждого элемента
+                element.style.animationDelay = `${index * 0.2}s`;
+                
+                // Запуск анимации
+                const animationClass = Array.from(element.classList).find(cls => 
+                    cls.startsWith('fade-in') || cls === 'pulse' || cls === 'float'
+                );
+                
+                if (animationClass) {
+                    element.classList.add(animationClass);
+                }
+            });
+            
+            // Плавная прокрутка для кнопки "Листай вниз"
+            document.querySelector('.scroll-down').addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
+
+    <!-- FAQ секция -->
+   <!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Премиум FAQ - ShizzyBoost</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-black: #0a0a0a;
+            --secondary-black: #1a1a1a;
+            --accent-black: #2a2a2a;
+            --primary-red: #e50914;
+            --secondary-red: #b2070f;
+            --accent-red: #ff2e2e;
+            --text-white: #f5f5f5;
+            --text-gray: #a0a0a0;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--primary-black);
+            color: var(--text-white);
+            overflow-x: hidden;
+        }
+
+        /* Премиум анимации */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes fadeInRight {
+            from {
+                opacity: 0;
+                transform: translateX(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+                box-shadow: 0 0 0 0 rgba(229, 9, 20, 0.7);
+            }
+            70% {
+                transform: scale(1.05);
+                box-shadow: 0 0 0 15px rgba(229, 9, 20, 0);
+            }
+            100% {
+                transform: scale(1);
+                box-shadow: 0 0 0 0 rgba(229, 9, 20, 0);
+            }
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-15px);
+            }
+        }
+
+        @keyframes glow {
+            0% {
+                text-shadow: 0 0 5px var(--primary-red);
+            }
+            50% {
+                text-shadow: 0 0 20px var(--accent-red), 0 0 30px var(--accent-red);
+            }
+            100% {
+                text-shadow: 0 0 5px var(--primary-red);
+            }
+        }
+
+        @keyframes shimmer {
+            0% {
+                background-position: -1000px 0;
+            }
+            100% {
+                background-position: 1000px 0;
+            }
+        }
+
+        @keyframes ripple {
+            0% {
+                transform: scale(0);
+                opacity: 1;
+            }
+            100% {
+                transform: scale(4);
+                opacity: 0;
+            }
+        }
+
+        @keyframes particleMove {
+            0% {
+                transform: translate(0, 0);
+                opacity: 1;
+            }
+            100% {
+                transform: translate(var(--move-x), var(--move-y));
+                opacity: 0;
+            }
+        }
+
+        @keyframes gradientShift {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        .animated {
+            opacity: 0;
+            transition: opacity 0.8s, transform 0.8s;
+        }
+
+        .fade-in-up {
+            animation: fadeInUp 1s ease-out forwards;
+        }
+
+        .fade-in-left {
+            animation: fadeInLeft 1s ease-out forwards;
+        }
+
+        .fade-in-right {
+            animation: fadeInRight 1s ease-out forwards;
+        }
+
+        .pulse {
+            animation: pulse 3s infinite;
+        }
+
+        .float {
+            animation: float 5s ease-in-out infinite;
+        }
+
+        .glow-text {
+            animation: glow 3s infinite;
+        }
+
+        /* FAQ секция */
+        .faq {
+            background: 
+                radial-gradient(circle at 10% 20%, rgba(229, 9, 20, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 90% 80%, rgba(229, 9, 20, 0.1) 0%, transparent 50%),
+                linear-gradient(135deg, var(--secondary-black) 0%, var(--primary-black) 100%);
+            padding: 6rem 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 4rem;
+            position: relative;
+        }
+
+        .section-title h2 {
+            font-size: 3.5rem;
+            display: inline-block;
+            position: relative;
+            background: linear-gradient(135deg, var(--text-white) 0%, var(--primary-red) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-size: 200% 200%;
+            animation: gradientShift 5s ease infinite;
+        }
+
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 120px;
+            height: 4px;
+            background: linear-gradient(90deg, transparent, var(--primary-red), transparent);
+            border-radius: 2px;
+        }
+
+        /* Категории FAQ */
+        .faq-categories {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            margin-bottom: 4rem;
+            position: relative;
+        }
+
+        .category-btn {
+            background: rgba(42, 42, 42, 0.8);
+            color: var(--text-white);
+            border: 2px solid transparent;
+            padding: 1rem 2.2rem;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.4s;
+            backdrop-filter: blur(10px);
+            position: relative;
+            overflow: hidden;
+            font-size: 1rem;
+        }
+
+        .category-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(229, 9, 20, 0.3), transparent);
+            transition: left 0.7s;
+        }
+
+        .category-btn:hover {
+            border-color: var(--primary-red);
+            color: var(--primary-red);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(229, 9, 20, 0.3);
+        }
+
+        .category-btn:hover::before {
+            left: 100%;
+        }
+
+        .category-btn.active {
+            background: var(--primary-red);
+            color: var(--text-white);
+            border-color: var(--primary-red);
+            box-shadow: 0 0 30px rgba(229, 9, 20, 0.6);
+            transform: translateY(-3px);
+        }
+
+        /* Контейнер FAQ */
+        .faq-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        /* Элементы FAQ */
+        .faq-item {
+            background: rgba(42, 42, 42, 0.7);
+            border-radius: 20px;
+            margin-bottom: 1.8rem;
+            overflow: hidden;
+            transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(15px);
+            position: relative;
+            transform-style: preserve-3d;
+            perspective: 1000px;
+        }
+
+        .faq-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(229, 9, 20, 0.15), transparent 40%);
+            opacity: 0;
+            transition: opacity 0.5s;
+        }
+
+        .faq-item:hover {
+            border-color: var(--primary-red);
+            transform: translateY(-8px) rotateX(2deg);
+            box-shadow: 0 20px 40px rgba(229, 9, 20, 0.25);
+        }
+
+        .faq-item:hover::before {
+            opacity: 1;
+        }
+
+        .faq-item.active {
+            border-color: var(--primary-red);
+            box-shadow: 0 15px 35px rgba(229, 9, 20, 0.4);
+            transform: translateY(-5px);
+        }
+
+        .faq-question {
+            padding: 2rem 2.5rem;
+            font-size: 1.3rem;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.4s;
+            position: relative;
+            background: rgba(26, 26, 26, 0.5);
+        }
+
+        .faq-question:hover {
+            color: var(--primary-red);
+            background: rgba(26, 26, 26, 0.7);
+        }
+
+        .faq-question::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 2.5rem;
+            right: 2.5rem;
+            height: 1px;
+            background: linear-gradient(90deg, var(--primary-red), transparent);
+            opacity: 0.3;
+        }
+
+        .faq-question i {
+            transition: all 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            color: var(--primary-red);
+            font-size: 1.2rem;
+        }
+
+        .faq-answer {
+            padding: 0 2.5rem;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55), padding 0.8s ease;
+            color: var(--text-gray);
+            line-height: 1.7;
+            position: relative;
+            background: linear-gradient(to bottom, transparent, rgba(26, 26, 26, 0.3));
+        }
+
+        .faq-item.active .faq-answer {
+            padding: 0 2.5rem 2.5rem;
+            max-height: 800px;
+        }
+
+        .faq-item.active .faq-question i {
+            transform: rotate(180deg) scale(1.3);
+            color: var(--accent-red);
+        }
+
+        /* Декоративные элементы */
+        .faq-decoration {
+            position: absolute;
+            width: 400px;
+            height: 400px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(229, 9, 20, 0.15) 0%, transparent 70%);
+            filter: blur(30px);
+            z-index: 0;
+        }
+
+        .decoration-1 {
+            top: 10%;
+            left: 5%;
+            animation: float 8s ease-in-out infinite;
+        }
+
+        .decoration-2 {
+            bottom: 15%;
+            right: 5%;
+            animation: float 10s ease-in-out infinite reverse;
+        }
+
+        /* Анимированные частицы */
+        .particles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+        }
+
+        .particle {
+            position: absolute;
+            width: 6px;
+            height: 6px;
+            background-color: var(--primary-red);
+            border-radius: 50%;
+            opacity: 0;
+            animation: particleMove 6s linear infinite;
+        }
+
+        /* Быстрый поиск */
+        .quick-search {
+            max-width: 600px;
+            margin: 0 auto 4rem;
+            position: relative;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 1.5rem 2.5rem;
+            background: rgba(42, 42, 42, 0.8);
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            border-radius: 50px;
+            color: var(--text-white);
+            font-size: 1.1rem;
+            transition: all 0.5s;
+            backdrop-filter: blur(15px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .search-input:focus {
+            outline: none;
+            border-color: var(--primary-red);
+            box-shadow: 0 15px 40px rgba(229, 9, 20, 0.4);
+            transform: translateY(-3px);
+        }
+
+        .search-input::placeholder {
+            color: var(--text-gray);
+        }
+
+        .search-icon {
+            position: absolute;
+            right: 25px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--primary-red);
+            font-size: 1.3rem;
+            transition: all 0.3s;
+        }
+
+        .search-input:focus + .search-icon {
+            color: var(--accent-red);
+            transform: translateY(-50%) scale(1.2);
+        }
+
+        /* Индикатор поиска */
+        .search-indicator {
+            text-align: center;
+            margin: 2rem 0;
+            opacity: 0;
+            transition: all 0.4s;
+        }
+
+        .search-indicator.active {
+            opacity: 1;
+        }
+
+        .search-indicator .pulse-dot {
+            display: inline-block;
+            width: 12px;
+            height: 12px;
+            background: var(--primary-red);
+            border-radius: 50%;
+            margin: 0 5px;
+            animation: pulse 2s infinite;
+        }
+
+        .search-indicator .pulse-dot:nth-child(2) {
+            animation-delay: 0.4s;
+        }
+
+        .search-indicator .pulse-dot:nth-child(3) {
+            animation-delay: 0.8s;
+        }
+
+        /* Адаптивность */
+        @media (max-width: 768px) {
+            .faq {
+                padding: 4rem 1rem;
+            }
+            
+            .section-title h2 {
+                font-size: 2.5rem;
+            }
+            
+            .faq-question {
+                padding: 1.5rem 1.5rem;
+                font-size: 1.1rem;
+            }
+            
+            .faq-answer {
+                padding: 0 1.5rem;
+            }
+            
+            .faq-item.active .faq-answer {
+                padding: 0 1.5rem 1.5rem;
+            }
+            
+            .category-btn {
+                padding: 0.8rem 1.5rem;
+                font-size: 0.9rem;
+            }
+            
+            .search-input {
+                padding: 1.2rem 1.8rem;
+                font-size: 1rem;
+            }
+            
+            .faq-decoration {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- FAQ секция -->
+    <section class="faq">
+        <!-- Декоративные элементы -->
+        <div class="faq-decoration decoration-1"></div>
+        <div class="faq-decoration decoration-2"></div>
+        
+        <!-- Анимированные частицы -->
+        <div class="particles" id="particles-container"></div>
+        
+        <div class="section-title">
+            <h2 class="animated fade-in-up">Часто задаваемые вопросы</h2>
+        </div>
+        
+        <!-- Быстрый поиск -->
+        <div class="quick-search animated fade-in-up" style="animation-delay: 0.2s;">
+            <input type="text" class="search-input" placeholder="Поиск по вопросам и ответам...">
+            <i class="fas fa-search search-icon"></i>
+        </div>
+        
+        <div class="faq-categories">
+            <button class="category-btn active pulse" data-category="all">Все вопросы</button>
+            <button class="category-btn" data-category="general">Общие</button>
+            <button class="category-btn" data-category="payment">Оплата</button>
+            <button class="category-btn" data-category="safety">Безопасность</button>
+            <button class="category-btn" data-category="services">Услуги</button>
+        </div>
+        
+        <!-- Индикатор поиска -->
+        <div class="search-indicator" id="searchIndicator">
+            <div class="pulse-dot"></div>
+            <div class="pulse-dot"></div>
+            <div class="pulse-dot"></div>
+            <span style="margin-left: 10px; color: var(--text-gray);">Поиск совпадений...</span>
+        </div>
+        
+        <div class="faq-container">
+            <!-- Общие вопросы -->
+            <div class="faq-item animated fade-in-up" data-category="general">
+                <div class="faq-question">
+                    <span>Как долго выполняется заказ?</span>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    <p>Время выполнения заказа зависит от типа услуги и её сложности. Обычно бустинг занимает от 1 до 7 дней, а доставка игровой валюты или предметов происходит в течение 1-24 часов. Точные сроки указываются при оформлении заказа.</p>
+                </div>
+            </div>
+            
+            <div class="faq-item animated fade-in-up" data-category="general">
+                <div class="faq-question">
+                    <span>Как оформить заказ?</span>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    <p>Для оформления заказа свяжитесь со мной через FunPay, Telegram или используйте форму обратной связи на сайте. Укажите необходимую услугу, детали заказа и предпочтительный способ связи. Я отвечу в течение 1-2 часов в рабочее время.</p>
+                </div>
+            </div>
+            
+            <!-- Оплата -->
+            <div class="faq-item animated fade-in-up" data-category="payment">
+                <div class="faq-question">
+                    <span>Какие способы оплаты вы принимаете?</span>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    <p>Я принимаю оплату через FunPay, банковские карты (Visa, MasterCard, МИР), QIWI, ЮMoney, а также криптовалюту (Bitcoin, USDT). Для постоянных клиентов доступны специальные условия и скидки.</p>
+                </div>
+            </div>
+            
+            <div class="faq-item animated fade-in-up" data-category="payment">
+                <div class="faq-question">
+                    <span>Можно ли получить возврат средств?</span>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    <p>Возврат средств возможен в случае, если я не смог выполнить заказ в оговоренные сроки по своей вине. Если заказ отменяется клиентом после начала выполнения, возврат осуществляется с вычетом понесенных расходов.</p>
+                </div>
+            </div>
+            
+            <!-- Безопасность -->
+            <div class="faq-item animated fade-in-up" data-category="safety">
+                <div class="faq-question">
+                    <span>Насколько безопасны ваши услуги?</span>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    <p>Я использую только безопасные методы выполнения заказов, которые не нарушают правила игр. Все действия выполняются вручную профессиональными игроками. За 3 года работы не было ни одного случая блокировки аккаунта клиента из-за моих услуг.</p>
+                </div>
+            </div>
+            
+            <div class="faq-item animated fade-in-up" data-category="safety">
+                <div class="faq-question">
+                    <span>Вы гарантируете конфиденциальность?</span>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    <p>Да, я гарантирую полную конфиденциальность ваших данных. Информация об аккаунте и детали заказа не передаются третьим лицам и удаляются после выполнения заказа. При бустинге я использую VPN для дополнительной безопасности.</p>
+                </div>
+            </div>
+            
+            <!-- Услуги -->
+            <div class="faq-item animated fade-in-up" data-category="services">
+                <div class="faq-question">
+                    <span>Нужно ли мне предоставлять доступ к аккаунту для бустинга?</span>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    <p>Для большинства услуг бустинга требуется временный доступ к аккаунту. Я использую одноразовые пароли и двухфакторную аутентификацию для максимальной безопасности. После выполнения заказа вы можете сменить пароль.</p>
+                </div>
+            </div>
+            
+            <div class="faq-item animated fade-in-up" data-category="services">
+                <div class="faq-question">
+                    <span>Можно ли заказать индивидуальную услугу?</span>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    <p>Да, я готов обсудить индивидуальные заказы, которые не представлены в основном списке услуг. Свяжитесь со мной, опишите ваши пожелания, и я сообщу о возможности выполнения и стоимости такой услуги.</p>
+                </div>
+            </div>
+            
+            <div class="faq-item animated fade-in-up" data-category="services">
+                <div class="faq-question">
+                    <span>Вы работаете со всеми регионами/серверами?</span>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    <p>Я работаю с большинством регионов и серверов популярных игр. Однако для некоторых специфических регионов могут быть ограничения. Уточняйте возможность работы с вашим регионом при оформлении заказа.</p>
+                </div>
+            </div>
+            
+            <div class="faq-item animated fade-in-up" data-category="general">
+                <div class="faq-question">
+                    <span>Что делать, если у меня возникли проблемы с заказом?</span>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    <p>Если у вас возникли любые проблемы с заказом, свяжитесь со мной напрямую через FunPay, Telegram или email. Я отвечаю в течение 1-2 часов в рабочее время и решаю все возникающие вопросы в приоритетном порядке.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Создание анимированных частиц
+            function createParticles() {
+                const container = document.getElementById('particles-container');
+                const particleCount = 25;
+                
+                for (let i = 0; i < particleCount; i++) {
+                    const particle = document.createElement('div');
+                    particle.classList.add('particle');
+                    
+                    // Случайные начальные позиции
+                    const startX = Math.random() * 100;
+                    const startY = Math.random() * 100;
+                    
+                    // Случайное движение
+                    const moveX = (Math.random() - 0.5) * 300;
+                    const moveY = (Math.random() - 0.5) * 300;
+                    
+                    // Случайная задержка и продолжительность
+                    const delay = Math.random() * 6;
+                    const duration = 6 + Math.random() * 4;
+                    
+                    particle.style.left = `${startX}%`;
+                    particle.style.top = `${startY}%`;
+                    particle.style.setProperty('--move-x', `${moveX}px`);
+                    particle.style.setProperty('--move-y', `${moveY}px`);
+                    particle.style.animationDelay = `${delay}s`;
+                    particle.style.animationDuration = `${duration}s`;
+                    
+                    // Случайный размер
+                    const size = 3 + Math.random() * 5;
+                    particle.style.width = `${size}px`;
+                    particle.style.height = `${size}px`;
+                    
+                    // Случайная прозрачность
+                    const opacity = 0.2 + Math.random() * 0.5;
+                    particle.style.opacity = opacity;
+                    
+                    container.appendChild(particle);
+                }
+            }
+
+            // Инициализация анимаций
+            const animatedElements = document.querySelectorAll('.animated');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const animationType = entry.target.classList[1];
+                        const delay = entry.target.style.animationDelay || '0s';
+                        entry.target.style.animationDelay = delay;
+                        entry.target.classList.add(animationType);
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.1 });
+            
+            animatedElements.forEach(element => {
+                observer.observe(element);
+            });
+            
+            // Аккордеон для FAQ
+            const faqItems = document.querySelectorAll('.faq-item');
+            let activeItem = null;
+            
+            faqItems.forEach(item => {
+                const question = item.querySelector('.faq-question');
+                
+                question.addEventListener('click', () => {
+                    // Создаем эффект ripple
+                    createRippleEffect(question);
+                    
+                    // Закрываем предыдущий активный элемент
+                    if (activeItem && activeItem !== item) {
+                        activeItem.classList.remove('active');
+                    }
+                    
+                    // Переключаем текущий элемент
+                    item.classList.toggle('active');
+                    activeItem = item.classList.contains('active') ? item : null;
+                });
+            });
+            
+            // Функция создания ripple эффекта
+            function createRippleEffect(element) {
+                const ripple = document.createElement('div');
+                const rect = element.getBoundingClientRect();
+                const size = Math.max(rect.width, rect.height);
+                const x = event.clientX - rect.left - size / 2;
+                const y = event.clientY - rect.top - size / 2;
+                
+                ripple.style.cssText = `
+                    position: absolute;
+                    width: ${size}px;
+                    height: ${size}px;
+                    background: rgba(229, 9, 20, 0.3);
+                    border-radius: 50%;
+                    left: ${x}px;
+                    top: ${y}px;
+                    transform: scale(0);
+                    animation: ripple 0.6s linear;
+                    pointer-events: none;
+                `;
+                
+                element.style.position = 'relative';
+                element.appendChild(ripple);
+                
+                setTimeout(() => {
+                    ripple.remove();
+                }, 600);
+            }
+            
+            // Фильтрация по категориям
+            const categoryButtons = document.querySelectorAll('.category-btn');
+            const searchIndicator = document.getElementById('searchIndicator');
+            
+            categoryButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    // Показываем индикатор поиска
+                    searchIndicator.classList.add('active');
+                    
+                    // Убираем активный класс у всех кнопок
+                    categoryButtons.forEach(btn => {
+                        btn.classList.remove('active', 'pulse');
+                    });
+                    
+                    // Добавляем активный класс нажатой кнопке
+                    button.classList.add('active', 'pulse');
+                    
+                    const category = button.getAttribute('data-category');
+                    
+                    // Имитация задержки поиска
+                    setTimeout(() => {
+                        // Показываем/скрываем вопросы в зависимости от категории
+                        faqItems.forEach(item => {
+                            if (category === 'all' || item.getAttribute('data-category') === category) {
+                                item.style.display = 'block';
+                                // Добавляем анимацию появления
+                                setTimeout(() => {
+                                    item.style.opacity = '1';
+                                    item.style.transform = 'translateY(0) rotateX(0)';
+                                }, 50);
+                            } else {
+                                item.style.opacity = '0';
+                                item.style.transform = 'translateY(20px) rotateX(10deg)';
+                                setTimeout(() => {
+                                    item.style.display = 'none';
+                                }, 400);
+                            }
+                        });
+                        
+                        // Скрываем индикатор поиска
+                        searchIndicator.classList.remove('active');
+                    }, 800);
+                });
+            });
+            
+            // Поиск по вопросам
+            const searchInput = document.querySelector('.search-input');
+            
+            searchInput.addEventListener('input', function() {
+                const searchTerm = this.value.toLowerCase();
+                
+                if (searchTerm.length > 0) {
+                    searchIndicator.classList.add('active');
+                    
+                    setTimeout(() => {
+                        faqItems.forEach(item => {
+                            const question = item.querySelector('.faq-question span').textContent.toLowerCase();
+                            const answer = item.querySelector('.faq-answer p').textContent.toLowerCase();
+                            
+                            if (question.includes(searchTerm) || answer.includes(searchTerm)) {
+                                item.style.display = 'block';
+                                // Подсвечиваем найденный текст
+                                highlightText(item, searchTerm);
+                                
+                                // Автоматически открываем найденные вопросы
+                                if (!item.classList.contains('active')) {
+                                    item.classList.add('active');
+                                }
+                            } else {
+                                item.style.display = 'none';
+                            }
+                        });
+                        
+                        searchIndicator.classList.remove('active');
+                    }, 600);
+                } else {
+                    // Показываем все вопросы, если поиск пустой
+                    faqItems.forEach(item => {
+                        item.style.display = 'block';
+                        removeHighlight(item);
+                    });
+                }
+            });
+            
+            // Функция подсветки текста
+            function highlightText(element, term) {
+                const question = element.querySelector('.faq-question span');
+                const answer = element.querySelector('.faq-answer p');
+                
+                const highlightQuestion = question.textContent.replace(
+                    new RegExp(term, 'gi'),
+                    match => `<span style="background: linear-gradient(transparent 60%, rgba(229, 9, 20, 0.4) 60%);">${match}</span>`
+                );
+                
+                const highlightAnswer = answer.textContent.replace(
+                    new RegExp(term, 'gi'),
+                    match => `<span style="background: linear-gradient(transparent 60%, rgba(229, 9, 20, 0.4) 60%);">${match}</span>`
+                );
+                
+                question.innerHTML = highlightQuestion;
+                answer.innerHTML = highlightAnswer;
+            }
+            
+            // Функция удаления подсветки
+            function removeHighlight(element) {
+                const question = element.querySelector('.faq-question span');
+                const answer = element.querySelector('.faq-answer p');
+                
+                question.innerHTML = question.textContent;
+                answer.innerHTML = answer.textContent;
+            }
+            
+            // Добавляем стиль для ripple анимации
+            const style = document.createElement('style');
+            style.textContent = `
+                @keyframes ripple {
+                    to {
+                        transform: scale(4);
+                        opacity: 0;
+                    }
+                }
+            `;
+            document.head.appendChild(style);
+            
+            // Создаем частицы после загрузки
+            createParticles();
+        });
+    </script>
+</body>
+</html>
+
+    <!-- Дополнительная помощь -->
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Премиум секция помощи - ShizzyBoost</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-black: #0a0a0a;
+            --secondary-black: #1a1a1a;
+            --accent-black: #2a2a2a;
+            --primary-red: #e50914;
+            --secondary-red: #b2070f;
+            --accent-red: #ff2e2e;
+            --text-white: #f5f5f5;
+            --text-gray: #a0a0a0;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--primary-black);
+            color: var(--text-white);
+            overflow-x: hidden;
+        }
+
+        /* Премиум анимации */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(80px) scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        @keyframes fadeInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-80px) rotate(-5deg);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0) rotate(0);
+            }
+        }
+
+        @keyframes fadeInRight {
+            from {
+                opacity: 0;
+                transform: translateX(80px) rotate(5deg);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0) rotate(0);
+            }
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+                box-shadow: 0 0 0 0 rgba(229, 9, 20, 0.7);
+            }
+            70% {
+                transform: scale(1.05);
+                box-shadow: 0 0 0 20px rgba(229, 9, 20, 0);
+            }
+            100% {
+                transform: scale(1);
+                box-shadow: 0 0 0 0 rgba(229, 9, 20, 0);
+            }
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0) rotate(0);
+            }
+            33% {
+                transform: translateY(-15px) rotate(2deg);
+            }
+            66% {
+                transform: translateY(-8px) rotate(-1deg);
+            }
+        }
+
+        @keyframes glow {
+            0% {
+                filter: drop-shadow(0 0 5px var(--primary-red));
+            }
+            50% {
+                filter: drop-shadow(0 0 20px var(--accent-red)) drop-shadow(0 0 30px var(--accent-red));
+            }
+            100% {
+                filter: drop-shadow(0 0 5px var(--primary-red));
+            }
+        }
+
+        @keyframes shimmer {
+            0% {
+                background-position: -1000px 0;
+            }
+            100% {
+                background-position: 1000px 0;
+            }
+        }
+
+        @keyframes gradientShift {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        @keyframes particleMove {
+            0% {
+                transform: translate(0, 0) rotate(0);
+                opacity: 1;
+            }
+            100% {
+                transform: translate(var(--move-x), var(--move-y)) rotate(var(--rotate));
+                opacity: 0;
+            }
+        }
+
+        .animated {
+            opacity: 0;
+            transition: opacity 0.8s, transform 0.8s;
+        }
+
+        .fade-in-up {
+            animation: fadeInUp 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+        }
+
+        .fade-in-left {
+            animation: fadeInLeft 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+        }
+
+        .fade-in-right {
+            animation: fadeInRight 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+        }
+
+        .pulse {
+            animation: pulse 3s infinite;
+        }
+
+        .float {
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .glow {
+            animation: glow 4s infinite;
+        }
+
+        /* Секция помощи */
+        .help-section {
+            background: 
+                radial-gradient(circle at 20% 30%, rgba(229, 9, 20, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 80% 70%, rgba(229, 9, 20, 0.1) 0%, transparent 50%),
+                linear-gradient(135deg, var(--primary-black) 0%, var(--secondary-black) 100%);
+            padding: 8rem 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 5rem;
+            position: relative;
+        }
+
+        .section-title h2 {
+            font-size: 3.5rem;
+            display: inline-block;
+            position: relative;
+            background: linear-gradient(135deg, var(--text-white) 0%, var(--primary-red) 50%, var(--accent-red) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-size: 200% 200%;
+            animation: gradientShift 6s ease infinite;
+            text-shadow: 0 0 30px rgba(229, 9, 20, 0.3);
+        }
+
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            bottom: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 150px;
+            height: 4px;
+            background: linear-gradient(90deg, transparent, var(--primary-red), transparent);
+            border-radius: 2px;
+            box-shadow: 0 0 15px rgba(229, 9, 20, 0.5);
+        }
+
+        /* Контейнер помощи */
+        .help-container {
+            max-width: 1300px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 3rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Карточки помощи */
+        .help-card {
+            background: rgba(42, 42, 42, 0.7);
+            border-radius: 25px;
+            padding: 3rem 2.5rem;
+            text-align: center;
+            transition: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            position: relative;
+            overflow: hidden;
+            transform-style: preserve-3d;
+            perspective: 1000px;
+        }
+
+        .help-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(229, 9, 20, 0.1) 0%, transparent 50%);
+            opacity: 0;
+            transition: opacity 0.6s;
+        }
+
+        .help-card::after {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(45deg, var(--primary-red), transparent, var(--accent-red), transparent, var(--primary-red));
+            background-size: 400% 400%;
+            border-radius: 27px;
+            z-index: -1;
+            opacity: 0;
+            transition: opacity 0.6s;
+            animation: gradientShift 4s ease infinite;
+        }
+
+        .help-card:hover {
+            transform: translateY(-15px) rotateX(5deg) scale(1.03);
+            border-color: var(--primary-red);
+            box-shadow: 0 25px 50px rgba(229, 9, 20, 0.3);
+        }
+
+        .help-card:hover::before {
+            opacity: 1;
+        }
+
+        .help-card:hover::after {
+            opacity: 1;
+        }
+
+        .help-icon {
+            font-size: 4.5rem;
+            color: var(--primary-red);
+            margin-bottom: 2rem;
+            transition: all 0.6s;
+            display: inline-block;
+            position: relative;
+        }
+
+        .help-card:hover .help-icon {
+            transform: scale(1.2) rotate(10deg);
+            animation: glow 2s infinite;
+        }
+
+        .help-card h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            color: var(--text-white);
+            position: relative;
+            display: inline-block;
+        }
+
+        .help-card h3::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 50px;
+            height: 2px;
+            background: var(--primary-red);
+            transition: width 0.4s;
+        }
+
+        .help-card:hover h3::after {
+            width: 100px;
+        }
+
+        .help-card p {
+            color: var(--text-gray);
+            margin-bottom: 2.5rem;
+            line-height: 1.7;
+            font-size: 1.1rem;
+        }
+
+        .help-button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, var(--primary-red) 0%, var(--accent-red) 100%);
+            color: var(--text-white);
+            padding: 1.2rem 2.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            border: 2px solid transparent;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 10px 25px rgba(229, 9, 20, 0.3);
+        }
+
+        .help-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.7s;
+        }
+
+        .help-button:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 15px 35px rgba(229, 9, 20, 0.5);
+            background: linear-gradient(135deg, var(--accent-red) 0%, var(--primary-red) 100%);
+        }
+
+        .help-button:hover::before {
+            left: 100%;
+        }
+
+        .help-button i {
+            margin-left: 0.8rem;
+            transition: transform 0.4s;
+        }
+
+        .help-button:hover i {
+            transform: translateX(5px) scale(1.2);
+        }
+
+        /* Декоративные элементы */
+        .help-decoration {
+            position: absolute;
+            width: 500px;
+            height: 500px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(229, 9, 20, 0.15) 0%, transparent 70%);
+            filter: blur(40px);
+            z-index: 1;
+        }
+
+        .decoration-1 {
+            top: 10%;
+            left: 5%;
+            animation: float 8s ease-in-out infinite;
+        }
+
+        .decoration-2 {
+            bottom: 15%;
+            right: 5%;
+            animation: float 10s ease-in-out infinite reverse;
+        }
+
+        /* Анимированные частицы */
+        .particles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+
+        .particle {
+            position: absolute;
+            border-radius: 50%;
+            opacity: 0;
+            animation: particleMove 8s linear infinite;
+        }
+
+        /* Адаптивность */
+        @media (max-width: 1024px) {
+            .help-container {
+                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+                gap: 2rem;
+            }
+            
+            .help-card {
+                padding: 2.5rem 2rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .help-section {
+                padding: 5rem 1rem;
+            }
+            
+            .section-title h2 {
+                font-size: 2.5rem;
+            }
+            
+            .help-container {
+                grid-template-columns: 1fr;
+                max-width: 500px;
+            }
+            
+            .help-card {
+                padding: 2rem 1.5rem;
+            }
+            
+            .help-icon {
+                font-size: 3.5rem;
+            }
+            
+            .help-decoration {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Секция помощи -->
+    <section class="help-section">
+        <!-- Декоративные элементы -->
+        <div class="help-decoration decoration-1"></div>
+        <div class="help-decoration decoration-2"></div>
+        
+        <!-- Анимированные частицы -->
+        <div class="particles" id="particles-container"></div>
+        
+        <div class="section-title">
+            <h2 class="animated fade-in-up">Нужна дополнительная помощь?</h2>
+        </div>
+        
+        <div class="help-container">
+            <div class="help-card animated fade-in-left">
+                <div class="help-icon float">
+                    <i class="fas fa-comments"></i>
+                </div>
+                <h3>Свяжитесь со мной</h3>
+                <p>Если вы не нашли ответ на свой вопрос, свяжитесь со мной напрямую через FunPay, Telegram или email. Я отвечаю быстро и всегда готов помочь!</p>
+                <a href="index.html#contacts" class="help-button pulse">
+                    Написать <i class="fas fa-paper-plane"></i>
+                </a>
+            </div>
+            
+            <div class="help-card animated fade-in-up">
+                <div class="help-icon float" style="animation-delay: 0.5s;">
+                    <i class="fas fa-shield-alt"></i>
+                </div>
+                <h3>Гарантии качества</h3>
+                <p>Узнайте больше о гарантиях, которые я предоставляю на все свои услуги. Ваша безопасность и удовлетворение - мой главный приоритет.</p>
+                <a href="#" class="help-button pulse" style="animation-delay: 0.3s;">
+                    Подробнее <i class="fas fa-shield-check"></i>
+                </a>
+            </div>
+            
+            <div class="help-card animated fade-in-right">
+                <div class="help-icon float" style="animation-delay: 1s;">
+                    <i class="fas fa-star"></i>
+                </div>
+                <h3>Отзывы клиентов</h3>
+                <p>Почитайте отзывы реальных клиентов о моих услугах и качестве работы. Убедитесь в профессионализме и надежности!</p>
+                <a href="index.html#reviews" class="help-button pulse" style="animation-delay: 0.6s;">
+                    Читать <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Создание анимированных частиц
+            function createParticles() {
+                const container = document.getElementById('particles-container');
+                const particleCount = 20;
+                
+                for (let i = 0; i < particleCount; i++) {
+                    const particle = document.createElement('div');
+                    particle.classList.add('particle');
+                    
+                    // Случайные начальные позиции
+                    const startX = Math.random() * 100;
+                    const startY = Math.random() * 100;
+                    
+                    // Случайное движение
+                    const moveX = (Math.random() - 0.5) * 400;
+                    const moveY = (Math.random() - 0.5) * 400;
+                    const rotate = (Math.random() - 0.5) * 360;
+                    
+                    // Случайная задержка и продолжительность
+                    const delay = Math.random() * 8;
+                    const duration = 8 + Math.random() * 4;
+                    
+                    // Случайная форма (круг или квадрат)
+                    const isCircle = Math.random() > 0.5;
+                    const size = 4 + Math.random() * 8;
+                    
+                    particle.style.left = `${startX}%`;
+                    particle.style.top = `${startY}%`;
+                    particle.style.setProperty('--move-x', `${moveX}px`);
+                    particle.style.setProperty('--move-y', `${moveY}px`);
+                    particle.style.setProperty('--rotate', `${rotate}deg`);
+                    particle.style.animationDelay = `${delay}s`;
+                    particle.style.animationDuration = `${duration}s`;
+                    
+                    particle.style.width = `${size}px`;
+                    particle.style.height = `${size}px`;
+                    
+                    if (isCircle) {
+                        particle.style.borderRadius = '50%';
+                        particle.style.background = `rgba(229, 9, 20, ${0.2 + Math.random() * 0.3})`;
+                    } else {
+                        particle.style.borderRadius = '2px';
+                        particle.style.background = `linear-gradient(45deg, rgba(229, 9, 20, ${0.2 + Math.random() * 0.3}), rgba(255, 46, 46, ${0.2 + Math.random() * 0.3}))`;
+                    }
+                    
+                    container.appendChild(particle);
+                }
+            }
+
+            // Инициализация анимаций
+            const animatedElements = document.querySelectorAll('.animated');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const animationType = entry.target.classList[1];
+                        const delay = entry.target.style.animationDelay || '0s';
+                        entry.target.style.animationDelay = delay;
+                        entry.target.classList.add(animationType);
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { 
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            });
+            
+            animatedElements.forEach(element => {
+                observer.observe(element);
+            });
+            
+            // Интерактивные эффекты для карточек
+            const helpCards = document.querySelectorAll('.help-card');
+            
+            helpCards.forEach(card => {
+                card.addEventListener('mouseenter', function() {
+                    this.style.zIndex = '10';
+                });
+                
+                card.addEventListener('mouseleave', function() {
+                    this.style.zIndex = '2';
+                });
+                
+                // Эффект параллакса при движении мыши
+                card.addEventListener('mousemove', function(e) {
+                    const cardRect = this.getBoundingClientRect();
+                    const cardCenterX = cardRect.left + cardRect.width / 2;
+                    const cardCenterY = cardRect.top + cardRect.height / 2;
+                    
+                    const mouseX = e.clientX - cardCenterX;
+                    const mouseY = e.clientY - cardCenterY;
+                    
+                    const rotateY = mouseX / 50;
+                    const rotateX = -mouseY / 50;
+                    
+                    this.style.transform = `translateY(-15px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.03)`;
+                });
+                
+                card.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(-15px) rotateX(5deg) scale(1.03)';
+                });
+            });
+            
+            // Создаем частицы после загрузки
+            createParticles();
+            
+            // Добавляем случайные задержки для анимаций
+            helpCards.forEach((card, index) => {
+                card.style.animationDelay = `${index * 0.2}s`;
+            });
+        });
+    </script>
+</body>
+</html>
+    <!-- Футер -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-col">
+                <h4>ShizzyBoost</h4>
+                <p>Профессиональные услуги бустинга и продажи игровых ценностей на FunPay с 2020 года.</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-telegram"></i></a>
+                    <a href="#"><i class="fab fa-vk"></i></a>
+                    <a href="#"><i class="fab fa-discord"></i></a>
+                </div>
+            </div>
+            <div class="footer-col">
+                <h4>Услуги</h4>
+                <ul class="footer-links">
+                    <li><a href="index.html#services">Бустинг аккаунтов</a></li>
+                    <li><a href="index.html#services">Игровая валюта</a></li>
+                    <li><a href="index.html#services">Игровые предметы</a></li>
+                    <li><a href="index.html#services">Консультации</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Поддержка</h4>
+                <ul class="footer-links">
+                    <li><a href="faq.html">Помощь</a></li>
+                    <li><a href="faq.html">FAQ</a></li>
+                    <li><a href="#">Гарантии</a></li>
+                    <li><a href="#">Политика конфиденциальности</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Контакты</h4>
+                <ul class="footer-links">
+                    <li><a href="#">FunPay: ShizzyBoost</a></li>
+                    <li><a href="#">Email: shizzyboost@example.com</a></li>
+                    <li><a href="#">Telegram: @shizzyboost</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>&copy; 2023 ShizzyBoost. Все права защищены.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Анимация появления элементов при скролле
+        document.addEventListener('DOMContentLoaded', function() {
+            const animatedElements = document.querySelectorAll('.animated');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const animationType = entry.target.classList[1];
+                        entry.target.style.animationDelay = '0.3s';
+                        entry.target.classList.add(animationType);
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, {
+                threshold: 0.1
+            });
+            
+            animatedElements.forEach(element => {
+                observer.observe(element);
+            });
+            
+            // Аккордеон для FAQ
+            const faqItems = document.querySelectorAll('.faq-item');
+            
+            faqItems.forEach(item => {
+                const question = item.querySelector('.faq-question');
+                
+                question.addEventListener('click', () => {
+                    // Закрываем все остальные открытые вопросы
+                    faqItems.forEach(otherItem => {
+                        if (otherItem !== item && otherItem.classList.contains('active')) {
+                            otherItem.classList.remove('active');
+                        }
+                    });
+                    
+                    // Переключаем текущий вопрос
+                    item.classList.toggle('active');
+                });
+            });
+            
+            // Фильтрация по категориям
+            const categoryButtons = document.querySelectorAll('.category-btn');
+            
+            categoryButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    // Убираем активный класс у всех кнопок
+                    categoryButtons.forEach(btn => btn.classList.remove('active'));
+                    
+                    // Добавляем активный класс нажатой кнопке
+                    button.classList.add('active');
+                    
+                    const category = button.getAttribute('data-category');
+                    
+                    // Показываем/скрываем вопросы в зависимости от категории
+                    faqItems.forEach(item => {
+                        if (category === 'all' || item.getAttribute('data-category') === category) {
+                            item.style.display = 'block';
+                        } else {
+                            item.style.display = 'none';
+                        }
+                    });
+                });
+            });
+            
+            // Плавная прокрутка для навигационных ссылок
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    const targetId = this.getAttribute('href');
+                    if (targetId === '#') return;
+                    
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 80,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

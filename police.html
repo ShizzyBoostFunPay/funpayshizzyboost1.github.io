@@ -1,0 +1,1160 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Политика конфиденциальности - ShizzyBoost</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-black: #0a0a0a;
+            --secondary-black: #1a1a1a;
+            --accent-black: #2a2a2a;
+            --primary-red: #e50914;
+            --secondary-red: #b2070f;
+            --accent-red: #ff2e2e;
+            --text-white: #f5f5f5;
+            --text-gray: #a0a0a0;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--primary-black);
+            color: var(--text-white);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* Премиум анимации */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(80px) scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        @keyframes fadeInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-80px) rotate(-5deg);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0) rotate(0);
+            }
+        }
+
+        @keyframes fadeInRight {
+            from {
+                opacity: 0;
+                transform: translateX(80px) rotate(5deg);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0) rotate(0);
+            }
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+                box-shadow: 0 0 0 0 rgba(229, 9, 20, 0.7);
+            }
+            70% {
+                transform: scale(1.05);
+                box-shadow: 0 0 0 20px rgba(229, 9, 20, 0);
+            }
+            100% {
+                transform: scale(1);
+                box-shadow: 0 0 0 0 rgba(229, 9, 20, 0);
+            }
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0) rotate(0);
+            }
+            33% {
+                transform: translateY(-15px) rotate(2deg);
+            }
+            66% {
+                transform: translateY(-8px) rotate(-1deg);
+            }
+        }
+
+        @keyframes glow {
+            0% {
+                filter: drop-shadow(0 0 5px var(--primary-red));
+            }
+            50% {
+                filter: drop-shadow(0 0 20px var(--accent-red)) drop-shadow(0 0 30px var(--accent-red));
+            }
+            100% {
+                filter: drop-shadow(0 0 5px var(--primary-red));
+            }
+        }
+
+        @keyframes gradientShift {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        @keyframes particleMove {
+            0% {
+                transform: translate(0, 0) rotate(0);
+                opacity: 1;
+            }
+            100% {
+                transform: translate(var(--move-x), var(--move-y)) rotate(var(--rotate));
+                opacity: 0;
+            }
+        }
+
+        @keyframes typewriter {
+            from {
+                width: 0;
+            }
+            to {
+                width: 100%;
+            }
+        }
+
+        @keyframes blink {
+            50% {
+                border-color: transparent;
+            }
+        }
+
+        @keyframes scanLine {
+            0% {
+                transform: translateY(-100%);
+                opacity: 0;
+            }
+            50% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(400%);
+                opacity: 0;
+            }
+        }
+
+        .animated {
+            opacity: 0;
+            transition: opacity 0.8s, transform 0.8s;
+        }
+
+        .fade-in-up {
+            animation: fadeInUp 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+        }
+
+        .fade-in-left {
+            animation: fadeInLeft 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+        }
+
+        .fade-in-right {
+            animation: fadeInRight 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+        }
+
+        .pulse {
+            animation: pulse 3s infinite;
+        }
+
+        .float {
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .glow {
+            animation: glow 4s infinite;
+        }
+
+        /* Навигация */
+        header {
+            background-color: rgba(10, 10, 10, 0.95);
+            position: fixed;
+            width: 100%;
+            z-index: 1000;
+            padding: 1rem 0;
+            box-shadow: 0 2px 20px rgba(229, 9, 20, 0.3);
+            backdrop-filter: blur(10px);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: var(--text-white);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+
+        .logo span {
+            color: var(--primary-red);
+        }
+
+        .logo i {
+            margin-right: 0.5rem;
+            color: var(--primary-red);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-links li {
+            margin-left: 2rem;
+        }
+
+        .nav-links a {
+            color: var(--text-white);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-red);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--primary-red);
+            transition: width 0.3s;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Герой секция */
+        .hero {
+            height: 60vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: 
+                radial-gradient(circle at 20% 30%, rgba(229, 9, 20, 0.2) 0%, transparent 50%),
+                radial-gradient(circle at 80% 70%, rgba(229, 9, 20, 0.15) 0%, transparent 50%),
+                linear-gradient(rgba(10, 10, 10, 0.9), rgba(10, 10, 10, 0.95)),
+                url('https://images.unsplash.com/photo-1550751827-4bd374c3f58b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80') no-repeat center center/cover;
+            text-align: center;
+            padding: 0 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, 
+                transparent 0%, 
+                rgba(229, 9, 20, 0.1) 50%, 
+                transparent 100%);
+            animation: scanLine 3s linear infinite;
+        }
+
+        .hero-content {
+            max-width: 900px;
+            z-index: 2;
+            position: relative;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+        }
+
+        .hero h1 .typing-text {
+            display: inline-block;
+            overflow: hidden;
+            border-right: 3px solid var(--primary-red);
+            white-space: nowrap;
+            animation: typewriter 4s steps(50, end), blink 1s step-end infinite;
+        }
+
+        .hero h1 span {
+            color: var(--primary-red);
+            position: relative;
+        }
+
+        .hero h1 span::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, var(--primary-red), transparent);
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 2.5rem;
+            color: var(--text-gray);
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Секции */
+        section {
+            padding: 6rem 2rem;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 4rem;
+            position: relative;
+        }
+
+        .section-title h2 {
+            font-size: 3rem;
+            display: inline-block;
+            position: relative;
+            background: linear-gradient(135deg, var(--text-white) 0%, var(--primary-red) 50%, var(--accent-red) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-size: 200% 200%;
+            animation: gradientShift 6s ease infinite;
+            text-shadow: 0 0 30px rgba(229, 9, 20, 0.3);
+        }
+
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 120px;
+            height: 4px;
+            background: linear-gradient(90deg, transparent, var(--primary-red), transparent);
+            border-radius: 2px;
+            box-shadow: 0 0 15px rgba(229, 9, 20, 0.5);
+        }
+
+        /* Секция политики */
+        .privacy-policy {
+            background: 
+                radial-gradient(circle at 10% 20%, rgba(229, 9, 20, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 90% 80%, rgba(229, 9, 20, 0.1) 0%, transparent 50%),
+                linear-gradient(135deg, var(--secondary-black) 0%, var(--primary-black) 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .policy-container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .policy-section {
+            background: rgba(42, 42, 42, 0.7);
+            border-radius: 25px;
+            padding: 3rem;
+            margin-bottom: 3rem;
+            transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .policy-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(229, 9, 20, 0.1) 0%, transparent 50%);
+            opacity: 0;
+            transition: opacity 0.5s;
+        }
+
+        .policy-section:hover {
+            border-color: var(--primary-red);
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(229, 9, 20, 0.25);
+        }
+
+        .policy-section:hover::before {
+            opacity: 1;
+        }
+
+        .policy-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+
+        .policy-icon {
+            font-size: 3rem;
+            color: var(--primary-red);
+            margin-right: 1.5rem;
+            transition: all 0.5s;
+        }
+
+        .policy-section:hover .policy-icon {
+            transform: scale(1.2) rotate(10deg);
+            animation: glow 2s infinite;
+        }
+
+        .policy-header h3 {
+            font-size: 1.8rem;
+            color: var(--text-white);
+            position: relative;
+        }
+
+        .policy-header h3::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 50px;
+            height: 2px;
+            background: var(--primary-red);
+            transition: width 0.4s;
+        }
+
+        .policy-section:hover .policy-header h3::after {
+            width: 100px;
+        }
+
+        .policy-content {
+            color: var(--text-gray);
+        }
+
+        .policy-content p {
+            margin-bottom: 1.5rem;
+            line-height: 1.7;
+        }
+
+        .policy-content ul {
+            margin: 1.5rem 0;
+            padding-left: 2rem;
+        }
+
+        .policy-content li {
+            margin-bottom: 0.8rem;
+            position: relative;
+        }
+
+        .policy-content li::before {
+            content: '▸';
+            color: var(--primary-red);
+            position: absolute;
+            left: -1.5rem;
+        }
+
+        .highlight-box {
+            background: rgba(229, 9, 20, 0.1);
+            border-left: 4px solid var(--primary-red);
+            padding: 1.5rem;
+            margin: 2rem 0;
+            border-radius: 0 10px 10px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .highlight-box::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.05), transparent);
+            animation: shimmer 3s infinite;
+        }
+
+        /* Секция защиты данных */
+        .data-protection {
+            background: var(--primary-black);
+            position: relative;
+        }
+
+        .protection-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .protection-card {
+            background: rgba(42, 42, 42, 0.7);
+            border-radius: 20px;
+            padding: 2.5rem;
+            text-align: center;
+            transition: all 0.5s;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(15px);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .protection-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: linear-gradient(to bottom, var(--primary-red), var(--accent-red));
+            opacity: 0;
+            transition: opacity 0.4s;
+        }
+
+        .protection-card:hover {
+            border-color: var(--primary-red);
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(229, 9, 20, 0.25);
+        }
+
+        .protection-card:hover::before {
+            opacity: 1;
+        }
+
+        .protection-icon {
+            font-size: 3.5rem;
+            color: var(--primary-red);
+            margin-bottom: 1.5rem;
+            transition: all 0.5s;
+        }
+
+        .protection-card:hover .protection-icon {
+            transform: scale(1.2);
+            animation: glow 2s infinite;
+        }
+
+        .protection-card h3 {
+            font-size: 1.4rem;
+            margin-bottom: 1rem;
+            color: var(--text-white);
+        }
+
+        .protection-card p {
+            color: var(--text-gray);
+            line-height: 1.6;
+        }
+
+        /* Секция контактов */
+        .privacy-contacts {
+            background: 
+                radial-gradient(circle at 20% 30%, rgba(229, 9, 20, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 80% 70%, rgba(229, 9, 20, 0.1) 0%, transparent 50%),
+                linear-gradient(135deg, var(--secondary-black) 0%, var(--primary-black) 100%);
+        }
+
+        .contacts-container {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .contacts-container p {
+            color: var(--text-gray);
+            margin-bottom: 3rem;
+            font-size: 1.1rem;
+        }
+
+        .contact-button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, var(--primary-red) 0%, var(--accent-red) 100%);
+            color: var(--text-white);
+            padding: 1.2rem 2.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.5s;
+            border: 2px solid transparent;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 10px 25px rgba(229, 9, 20, 0.3);
+        }
+
+        .contact-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.7s;
+        }
+
+        .contact-button:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 15px 35px rgba(229, 9, 20, 0.5);
+            background: linear-gradient(135deg, var(--accent-red) 0%, var(--primary-red) 100%);
+        }
+
+        .contact-button:hover::before {
+            left: 100%;
+        }
+
+        .contact-button i {
+            margin-left: 0.8rem;
+            transition: transform 0.4s;
+        }
+
+        .contact-button:hover i {
+            transform: translateX(5px) scale(1.2);
+        }
+
+        /* Футер */
+        footer {
+            background-color: var(--secondary-black);
+            padding: 4rem 2rem 2rem;
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+        }
+
+        .footer-col h4 {
+            font-size: 1.2rem;
+            margin-bottom: 1.5rem;
+            color: var(--primary-red);
+            position: relative;
+        }
+
+        .footer-col h4::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 40px;
+            height: 2px;
+            background-color: var(--primary-red);
+        }
+
+        .footer-col p {
+            color: var(--text-gray);
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-links a {
+            color: var(--text-gray);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: var(--primary-red);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: var(--accent-black);
+            border-radius: 50%;
+            color: var(--text-white);
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .social-links a:hover {
+            background-color: var(--primary-red);
+            transform: translateY(-5px);
+        }
+
+        .copyright {
+            text-align: center;
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid #333;
+            color: var(--text-gray);
+            font-size: 0.9rem;
+        }
+
+        /* Декоративные элементы */
+        .decoration {
+            position: absolute;
+            width: 400px;
+            height: 400px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(229, 9, 20, 0.15) 0%, transparent 70%);
+            filter: blur(40px);
+            z-index: 1;
+        }
+
+        .decoration-1 {
+            top: 10%;
+            left: 5%;
+            animation: float 8s ease-in-out infinite;
+        }
+
+        .decoration-2 {
+            bottom: 15%;
+            right: 5%;
+            animation: float 10s ease-in-out infinite reverse;
+        }
+
+        /* Анимированные частицы */
+        .particles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+
+        .particle {
+            position: absolute;
+            border-radius: 50%;
+            opacity: 0;
+            animation: particleMove 8s linear infinite;
+        }
+
+        /* Адаптивность */
+        @media (max-width: 1024px) {
+            .protection-grid {
+                grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            }
+            
+            .policy-section {
+                padding: 2.5rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero p {
+                font-size: 1.1rem;
+            }
+            
+            section {
+                padding: 4rem 1rem;
+            }
+            
+            .section-title h2 {
+                font-size: 2.2rem;
+            }
+            
+            .policy-section {
+                padding: 2rem 1.5rem;
+            }
+            
+            .policy-header {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .policy-icon {
+                margin-right: 0;
+                margin-bottom: 1rem;
+            }
+            
+            .footer-container {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .decoration {
+                display: none;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .footer-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .protection-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .hero {
+                height: 50vh;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Навигация -->
+    <header>
+        <div class="nav-container">
+            <a href="index.html" class="logo"><i class="fas fa-rocket"></i>Shizzy<span>Boost</span></a>
+            <ul class="nav-links">
+                <li><a href="index.html">Главная</a></li>
+                <li><a href="index.html#services">Услуги</a></li>
+                <li><a href="faq.html">FAQ</a></li>
+                <li><a href="guarantees.html">Гарантии</a></li>
+                <li><a href="privacy.html" class="active">Конфиденциальность</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <!-- Герой секция -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1 class="animated fade-in-up">
+                <span class="typing-text">Политика конфиденциальности</span>
+            </h1>
+            <p class="animated fade-in-up" style="animation-delay: 0.3s;">
+                Ваша конфиденциальность важна для нас. Узнайте, как мы защищаем и используем ваши данные.
+            </p>
+        </div>
+    </section>
+
+    <!-- Секция политики -->
+    <section class="privacy-policy">
+        <div class="decoration decoration-1"></div>
+        <div class="decoration decoration-2"></div>
+        
+        <div class="section-title">
+            <h2 class="animated fade-in-up">Наша политика</h2>
+        </div>
+        
+        <div class="policy-container">
+            <div class="policy-section animated fade-in-up">
+                <div class="policy-header">
+                    <div class="policy-icon float">
+                        <i class="fas fa-database"></i>
+                    </div>
+                    <h3>Сбор информации</h3>
+                </div>
+                <div class="policy-content">
+                    <p>Мы собираем только ту информацию, которая необходима для предоставления наших услуг:</p>
+                    <ul>
+                        <li>Контактные данные для связи (email, никнейм в играх)</li>
+                        <li>Информация об игровом аккаунте (только для выполнения заказа)</li>
+                        <li>Детали заказа и история обслуживания</li>
+                        <li>Технические данные (IP-адрес, тип устройства)</li>
+                    </ul>
+                    <div class="highlight-box">
+                        <p><strong>Важно:</strong> Мы никогда не запрашиваем и не храним пароли от ваших аккаунтов. Доступ предоставляется через временные коды или двухфакторную аутентификацию.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="policy-section animated fade-in-up" style="animation-delay: 0.2s;">
+                <div class="policy-header">
+                    <div class="policy-icon float">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3>Использование данных</h3>
+                </div>
+                <div class="policy-content">
+                    <p>Собранная информация используется исключительно для:</p>
+                    <ul>
+                        <li>Выполнения заказанных услуг</li>
+                        <li>Обеспечения технической поддержки</li>
+                        <li>Улучшения качества наших услуг</li>
+                        <li>Соблюдения юридических обязательств</li>
+                        <li>Предотвращения мошенничества</li>
+                    </ul>
+                    <p>Мы не используем ваши данные для маркетинговых рассылок без вашего явного согласия.</p>
+                </div>
+            </div>
+            
+            <div class="policy-section animated fade-in-up" style="animation-delay: 0.4s;">
+                <div class="policy-header">
+                    <div class="policy-icon float">
+                        <i class="fas fa-lock"></i>
+                    </div>
+                    <h3>Защита данных</h3>
+                </div>
+                <div class="policy-content">
+                    <p>Мы применяем многоуровневую систему защиты ваших данных:</p>
+                    <ul>
+                        <li>Шифрование передаваемых данных</li>
+                        <li>Регулярное обновление систем безопасности</li>
+                        <li>Ограниченный доступ к персональной информации</li>
+                        <li>Регулярное резервное копирование</li>
+                        <li>Анонимизация данных после выполнения заказа</li>
+                    </ul>
+                    <div class="highlight-box">
+                        <p><strong>Гарантия:</strong> Все данные удаляются из наших систем через 30 дней после завершения заказа, если не требуется их хранение по юридическим причинам.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="policy-section animated fade-in-up" style="animation-delay: 0.6s;">
+                <div class="policy-header">
+                    <div class="policy-icon float">
+                        <i class="fas fa-share-alt"></i>
+                    </div>
+                    <h3>Передача данных</h3>
+                </div>
+                <div class="policy-content">
+                    <p>Мы не передаем ваши персональные данные третьим лицам, за исключением:</p>
+                    <ul>
+                        <li>Случаев, требуемых законодательством</li>
+                        <li>Партнеров, непосредственно участвующих в выполнении заказа</li>
+                        <li>Платежных систем для обработки транзакций</li>
+                    </ul>
+                    <p>Все третьи стороны, имеющие доступ к данным, соблюдают строгие соглашения о конфиденциальности.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Секция защиты данных -->
+    <section class="data-protection">
+        <div class="section-title">
+            <h2 class="animated fade-in-up">Меры защиты</h2>
+        </div>
+        
+        <div class="protection-grid">
+            <div class="protection-card animated fade-in-left">
+                <div class="protection-icon">
+                    <i class="fas fa-user-secret"></i>
+                </div>
+                <h3>Анонимизация</h3>
+                <p>Все данные обезличиваются после выполнения заказа. Мы храним только информацию, необходимую для ведения статистики и улучшения услуг.</p>
+            </div>
+            
+            <div class="protection-card animated fade-in-up">
+                <div class="protection-icon">
+                    <i class="fas fa-server"></i>
+                </div>
+                <h3>Безопасные серверы</h3>
+                <p>Данные хранятся на защищенных серверах с регулярным обновлением безопасности и мониторингом на предмет несанкционированного доступа.</p>
+            </div>
+            
+            <div class="protection-card animated fade-in-right">
+                <div class="protection-icon">
+                    <i class="fas fa-clock"></i>
+                </div>
+                <h3>Ограниченное хранение</h3>
+                <p>Персональные данные удаляются через 30 дней после завершения заказа. Статистическая информация хранится в обезличенном виде.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Секция контактов -->
+  
+
+    <!-- Футер -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-col">
+                <h4>ShizzyBoost</h4>
+                <p>Профессиональные услуги бустинга и продажи игровых ценностей на FunPay с 2020 года.</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-telegram"></i></a>
+                    <a href="#"><i class="fab fa-vk"></i></a>
+                    <a href="#"><i class="fab fa-discord"></i></a>
+                </div>
+            </div>
+            <div class="footer-col">
+                <h4>Услуги</h4>
+                <ul class="footer-links">
+                    <li><a href="index.html#services">Бустинг аккаунтов</a></li>
+                    <li><a href="index.html#services">Игровая валюта</a></li>
+                    <li><a href="index.html#services">Игровые предметы</a></li>
+                    <li><a href="index.html#services">Консультации</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Поддержка</h4>
+                <ul class="footer-links">
+                    <li><a href="faq.html">FAQ</a></li>
+                    <li><a href="guarantees.html">Гарантии</a></li>
+                    <li><a href="privacy.html">Конфиденциальность</a></li>
+                    <li><a href="index.html#contacts">Контакты</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Контакты</h4>
+                <ul class="footer-links">
+                    <li><a href="#">FunPay: ShizzyBoost</a></li>
+                    <li><a href="#">Email: shizzyboost@example.com</a></li>
+                    <li><a href="#">Telegram: @shizzyboost</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>&copy; 2023 ShizzyBoost. Все права защищены. Обновлено: Декабрь 2023</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Создание анимированных частиц
+            function createParticles() {
+                const container = document.getElementById('particles-container');
+                if (!container) return;
+                
+                const particleCount = 15;
+                
+                for (let i = 0; i < particleCount; i++) {
+                    const particle = document.createElement('div');
+                    particle.classList.add('particle');
+                    
+                    // Случайные начальные позиции
+                    const startX = Math.random() * 100;
+                    const startY = Math.random() * 100;
+                    
+                    // Случайное движение
+                    const moveX = (Math.random() - 0.5) * 400;
+                    const moveY = (Math.random() - 0.5) * 400;
+                    const rotate = (Math.random() - 0.5) * 360;
+                    
+                    // Случайная задержка и продолжительность
+                    const delay = Math.random() * 8;
+                    const duration = 8 + Math.random() * 4;
+                    
+                    // Случайный размер
+                    const size = 3 + Math.random() * 6;
+                    
+                    particle.style.left = `${startX}%`;
+                    particle.style.top = `${startY}%`;
+                    particle.style.setProperty('--move-x', `${moveX}px`);
+                    particle.style.setProperty('--move-y', `${moveY}px`);
+                    particle.style.setProperty('--rotate', `${rotate}deg`);
+                    particle.style.animationDelay = `${delay}s`;
+                    particle.style.animationDuration = `${duration}s`;
+                    
+                    particle.style.width = `${size}px`;
+                    particle.style.height = `${size}px`;
+                    particle.style.background = `rgba(229, 9, 20, ${0.1 + Math.random() * 0.2})`;
+                    particle.style.borderRadius = '50%';
+                    
+                    container.appendChild(particle);
+                }
+            }
+
+            // Инициализация анимаций
+            const animatedElements = document.querySelectorAll('.animated');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const animationType = entry.target.classList[1];
+                        const delay = entry.target.style.animationDelay || '0s';
+                        entry.target.style.animationDelay = delay;
+                        entry.target.classList.add(animationType);
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { 
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            });
+            
+            animatedElements.forEach(element => {
+                observer.observe(element);
+            });
+            
+            // Интерактивные эффекты для карточек
+            const policySections = document.querySelectorAll('.policy-section');
+            const protectionCards = document.querySelectorAll('.protection-card');
+            
+            policySections.forEach(section => {
+                section.addEventListener('mouseenter', function() {
+                    this.style.zIndex = '10';
+                });
+                
+                section.addEventListener('mouseleave', function() {
+                    this.style.zIndex = '2';
+                });
+            });
+            
+            protectionCards.forEach(card => {
+                card.addEventListener('mouseenter', function() {
+                    this.style.zIndex = '10';
+                });
+                
+                card.addEventListener('mouseleave', function() {
+                    this.style.zIndex = '2';
+                });
+            });
+            
+            // Плавная прокрутка для навигационных ссылок
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    const targetId = this.getAttribute('href');
+                    if (targetId === '#') return;
+                    
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 100,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+            
+            // Создаем частицы после загрузки
+            createParticles();
+        });
+    </script>
+</body>
+</html>

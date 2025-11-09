@@ -1,0 +1,3835 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ShizzyBoost - Премиум услуги FunPay</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-black: #0a0a0a;
+            --secondary-black: #1a1a1a;
+            --accent-black: #2a2a2a;
+            --primary-red: #e50914;
+            --secondary-red: #b2070f;
+            --accent-red: #ff2e2e;
+            --text-white: #f5f5f5;
+            --text-gray: #a0a0a0;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--primary-black);
+            color: var(--text-white);
+            overflow-x: hidden;
+        }
+
+        /* Стили для премиум анимаций */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes fadeInRight {
+            from {
+                opacity: 0;
+                transform: translateX(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        @keyframes glow {
+            0% {
+                box-shadow: 0 0 5px var(--primary-red);
+            }
+            50% {
+                box-shadow: 0 0 20px var(--accent-red);
+            }
+            100% {
+                box-shadow: 0 0 5px var(--primary-red);
+            }
+        }
+
+        .animated {
+            opacity: 0;
+            transition: opacity 0.8s, transform 0.8s;
+        }
+
+        .fade-in-up {
+            animation: fadeInUp 1s ease-out forwards;
+        }
+
+        .fade-in-left {
+            animation: fadeInLeft 1s ease-out forwards;
+        }
+
+        .fade-in-right {
+            animation: fadeInRight 1s ease-out forwards;
+        }
+
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+
+        .glow {
+            animation: glow 3s infinite;
+        }
+
+        /* Навигация */
+        header {
+            background-color: rgba(10, 10, 10, 0.9);
+            position: fixed;
+            width: 100%;
+            z-index: 1000;
+            padding: 1rem 0;
+            box-shadow: 0 2px 10px rgba(229, 9, 20, 0.3);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: var(--text-white);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+
+        .logo span {
+            color: var(--primary-red);
+        }
+
+        .logo i {
+            margin-right: 0.5rem;
+            color: var(--primary-red);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-links li {
+            margin-left: 2rem;
+        }
+
+        .nav-links a {
+            color: var(--text-white);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-red);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--primary-red);
+            transition: width 0.3s;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Герой секция */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(rgba(10, 10, 10, 0.8), rgba(10, 10, 10, 0.9)), url('https://images.unsplash.com/photo-1542751371-adc38448a05e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80') no-repeat center center/cover;
+            text-align: center;
+            padding: 0 2rem;
+        }
+
+        .hero-content {
+            max-width: 800px;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            text-shadow: 0 0 10px rgba(229, 9, 20, 0.5);
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            color: var(--text-gray);
+        }
+
+        .cta-button {
+            display: inline-block;
+            background-color: var(--primary-red);
+            color: var(--text-white);
+            padding: 0.8rem 2rem;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.1rem;
+            transition: all 0.3s;
+            border: 2px solid var(--primary-red);
+        }
+
+        .cta-button:hover {
+            background-color: transparent;
+            color: var(--primary-red);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(229, 9, 20, 0.3);
+        }
+
+        /* Секции */
+        section {
+            padding: 5rem 2rem;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+            position: relative;
+        }
+
+        .section-title h2 {
+            font-size: 2.5rem;
+            display: inline-block;
+            position: relative;
+        }
+
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background-color: var(--primary-red);
+        }
+
+        /* Обо мне */
+        .about {
+            background-color: var(--secondary-black);
+        }
+
+        .about-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .about-text h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            color: var(--primary-red);
+        }
+
+        .about-text p {
+            margin-bottom: 1rem;
+            line-height: 1.6;
+            color: var(--text-gray);
+        }
+
+        .about-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .stat {
+            text-align: center;
+            padding: 1.5rem;
+            background-color: var(--accent-black);
+            border-radius: 10px;
+            transition: transform 0.3s;
+        }
+
+        .stat:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .stat i {
+            font-size: 2rem;
+            color: var(--primary-red);
+            margin-bottom: 1rem;
+        }
+
+        .stat h4 {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat p {
+            color: var(--text-gray);
+        }
+
+        /* Услуги */
+        .services {
+            background-color: var(--primary-black);
+        }
+
+        .services-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .service-card {
+            background-color: var(--secondary-black);
+            border-radius: 10px;
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.3s;
+            border: 1px solid transparent;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--primary-red);
+            box-shadow: 0 10px 30px rgba(229, 9, 20, 0.2);
+        }
+
+        .service-icon {
+            font-size: 3rem;
+            color: var(--primary-red);
+            margin-bottom: 1.5rem;
+        }
+
+        .service-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .service-card p {
+            color: var(--text-gray);
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+
+        .service-price {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--primary-red);
+            margin-bottom: 1.5rem;
+        }
+
+        .service-button {
+            display: inline-block;
+            background-color: transparent;
+            color: var(--primary-red);
+            padding: 0.6rem 1.5rem;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: bold;
+            border: 2px solid var(--primary-red);
+            transition: all 0.3s;
+        }
+
+        .service-button:hover {
+            background-color: var(--primary-red);
+            color: var(--text-white);
+        }
+
+        /* Отзывы */
+        .reviews {
+            background-color: var(--secondary-black);
+        }
+
+        .reviews-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .review-card {
+            background-color: var(--accent-black);
+            border-radius: 10px;
+            padding: 2rem;
+            transition: all 0.3s;
+        }
+
+        .review-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 30px rgba(229, 9, 20, 0.2);
+        }
+
+        .review-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .review-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background-color: var(--primary-red);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 1rem;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .review-info h4 {
+            font-size: 1.2rem;
+            margin-bottom: 0.3rem;
+        }
+
+        .review-info p {
+            color: var(--text-gray);
+            font-size: 0.9rem;
+        }
+
+        .review-stars {
+            color: var(--primary-red);
+            margin-bottom: 1rem;
+        }
+
+        .review-text {
+            color: var(--text-gray);
+            line-height: 1.6;
+            font-style: italic;
+        }
+
+        /* Контакты */
+        .contacts {
+            background-color: var(--primary-black);
+        }
+
+        .contacts-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+        }
+
+        .contact-info h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            color: var(--primary-red);
+        }
+
+        .contact-info p {
+            margin-bottom: 1.5rem;
+            color: var(--text-gray);
+            line-height: 1.6;
+        }
+
+        .contact-details {
+            margin-top: 2rem;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .contact-icon {
+            width: 50px;
+            height: 50px;
+            background-color: var(--primary-red);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 1rem;
+            font-size: 1.2rem;
+        }
+
+        .contact-text h4 {
+            font-size: 1.1rem;
+            margin-bottom: 0.3rem;
+        }
+
+        .contact-text p {
+            margin: 0;
+            color: var(--text-gray);
+        }
+
+        .contact-form {
+            background-color: var(--secondary-black);
+            padding: 2rem;
+            border-radius: 10px;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--text-gray);
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 0.8rem 1rem;
+            background-color: var(--accent-black);
+            border: 1px solid #333;
+            border-radius: 5px;
+            color: var(--text-white);
+            font-size: 1rem;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary-red);
+        }
+
+        textarea.form-control {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        .submit-button {
+            background-color: var(--primary-red);
+            color: var(--text-white);
+            border: none;
+            padding: 0.8rem 2rem;
+            border-radius: 30px;
+            font-weight: bold;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .submit-button:hover {
+            background-color: var(--secondary-red);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(229, 9, 20, 0.3);
+        }
+
+        /* Футер */
+        footer {
+            background-color: var(--secondary-black);
+            padding: 3rem 2rem 1rem;
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+        }
+
+        .footer-col h4 {
+            font-size: 1.2rem;
+            margin-bottom: 1.5rem;
+            color: var(--primary-red);
+            position: relative;
+        }
+
+        .footer-col h4::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 40px;
+            height: 2px;
+            background-color: var(--primary-red);
+        }
+
+        .footer-col p {
+            color: var(--text-gray);
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-links a {
+            color: var(--text-gray);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: var(--primary-red);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: var(--accent-black);
+            border-radius: 50%;
+            color: var(--text-white);
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .social-links a:hover {
+            background-color: var(--primary-red);
+            transform: translateY(-5px);
+        }
+
+        .copyright {
+            text-align: center;
+            margin-top: 3rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid #333;
+            color: var(--text-gray);
+            font-size: 0.9rem;
+        }
+
+        /* Адаптивность */
+        @media (max-width: 992px) {
+            .about-content,
+            .contacts-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .footer-container {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .about-stats {
+                grid-template-columns: 1fr;
+            }
+            
+            .footer-container {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Навигация -->
+    <header>
+        <div class="nav-container">
+            <a href="#" class="logo"><i class="fas fa-rocket"></i>Shizzy<span>Boost</span></a>
+            <ul class="nav-links">
+                <li><a href="#home">Главная</a></li>
+                <li><a href="#about">Обо мне</a></li>
+                <li><a href="#services">Услуги</a></li>
+                <li><a href="#reviews">Отзывы</a></li>
+                <li><a href="#contacts">Контакты</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <!-- Герой секция -->
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ShizzyBoost - Премиум герой секция</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-black: #0a0a0a;
+            --secondary-black: #1a1a1a;
+            --accent-black: #2a2a2a;
+            --primary-red: #e50914;
+            --secondary-red: #b2070f;
+            --accent-red: #ff2e2e;
+            --text-white: #f5f5f5;
+            --text-gray: #a0a0a0;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--primary-black);
+            color: var(--text-white);
+            overflow-x: hidden;
+        }
+
+        /* Премиум анимации */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(80px) scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+                box-shadow: 0 0 0 0 rgba(229, 9, 20, 0.7);
+            }
+            70% {
+                transform: scale(1.05);
+                box-shadow: 0 0 0 20px rgba(229, 9, 20, 0);
+            }
+            100% {
+                transform: scale(1);
+                box-shadow: 0 0 0 0 rgba(229, 9, 20, 0);
+            }
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0) rotate(0);
+            }
+            33% {
+                transform: translateY(-15px) rotate(2deg);
+            }
+            66% {
+                transform: translateY(-8px) rotate(-1deg);
+            }
+        }
+
+        @keyframes glow {
+            0% {
+                text-shadow: 0 0 5px var(--primary-red);
+            }
+            50% {
+                text-shadow: 0 0 20px var(--accent-red), 0 0 30px var(--accent-red);
+            }
+            100% {
+                text-shadow: 0 0 5px var(--primary-red);
+            }
+        }
+
+        @keyframes gradientShift {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        @keyframes particleMove {
+            0% {
+                transform: translate(0, 0);
+                opacity: 1;
+            }
+            100% {
+                transform: translate(var(--move-x), var(--move-y));
+                opacity: 0;
+            }
+        }
+
+        @keyframes typewriter {
+            from {
+                width: 0;
+            }
+            to {
+                width: 100%;
+            }
+        }
+
+        @keyframes blink {
+            50% {
+                border-color: transparent;
+            }
+        }
+
+        .animated {
+            opacity: 0;
+            transition: opacity 0.8s, transform 0.8s;
+        }
+
+        .fade-in-up {
+            animation: fadeInUp 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+        }
+
+        .pulse {
+            animation: pulse 3s infinite;
+        }
+
+        .float {
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .glow-text {
+            animation: glow 3s infinite;
+        }
+
+        /* Герой секция */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: 
+                radial-gradient(circle at 20% 30%, rgba(229, 9, 20, 0.25) 0%, transparent 50%),
+                radial-gradient(circle at 80% 70%, rgba(229, 9, 20, 0.2) 0%, transparent 50%),
+                linear-gradient(rgba(10, 10, 10, 0.9), rgba(10, 10, 10, 0.95)),
+                url('https://images.unsplash.com/photo-1542751371-adc38448a05e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80') no-repeat center center/cover;
+            text-align: center;
+            padding: 0 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Анимированные частицы */
+        .particles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background-color: var(--primary-red);
+            border-radius: 50%;
+            opacity: 0;
+            animation: particleMove 5s linear infinite;
+        }
+
+        .hero-content {
+            max-width: 900px;
+            z-index: 2;
+            position: relative;
+        }
+
+        .hero h1 {
+            font-size: 4.5rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+            text-shadow: 0 0 30px rgba(229, 9, 20, 0.5);
+        }
+
+        .hero h1 .typing-text {
+            display: inline-block;
+            overflow: hidden;
+            border-right: 3px solid var(--primary-red);
+            white-space: nowrap;
+            animation: typewriter 3.5s steps(40, end), blink 1s step-end infinite;
+        }
+
+        .hero h1 span {
+            color: var(--primary-red);
+            position: relative;
+            background: linear-gradient(135deg, var(--primary-red) 0%, var(--accent-red) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-size: 200% 200%;
+            animation: gradientShift 5s ease infinite;
+        }
+
+        .hero h1 span::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, var(--primary-red), transparent);
+        }
+
+        .hero p {
+            font-size: 1.4rem;
+            margin-bottom: 3rem;
+            color: var(--text-gray);
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.6;
+        }
+
+        .cta-button {
+            display: inline-flex;
+            align-items: center;
+            background: linear-gradient(135deg, var(--primary-red) 0%, var(--accent-red) 100%);
+            color: var(--text-white);
+            padding: 1.2rem 3rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.2rem;
+            transition: all 0.4s;
+            border: 2px solid transparent;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+            box-shadow: 0 10px 30px rgba(229, 9, 20, 0.4);
+        }
+
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.7s;
+            z-index: -1;
+        }
+
+        .cta-button:hover {
+            background: transparent;
+            color: var(--primary-red);
+            border-color: var(--primary-red);
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(229, 9, 20, 0.6);
+        }
+
+        .cta-button:hover::before {
+            left: 100%;
+        }
+
+        .cta-button i {
+            margin-left: 0.8rem;
+            font-size: 1.3rem;
+            transition: transform 0.3s;
+        }
+
+        .cta-button:hover i {
+            transform: translateX(5px);
+        }
+
+        /* Статистика */
+        .hero-stats {
+            display: flex;
+            justify-content: center;
+            gap: 4rem;
+            margin-top: 4rem;
+            flex-wrap: wrap;
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 1.5rem 2rem;
+            background: rgba(26, 26, 26, 0.7);
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(229, 9, 20, 0.2);
+            transition: all 0.4s;
+            min-width: 180px;
+        }
+
+        .stat-item:hover {
+            transform: translateY(-10px);
+            border-color: var(--primary-red);
+            box-shadow: 0 15px 35px rgba(229, 9, 20, 0.3);
+        }
+
+        .stat-item i {
+            font-size: 2.5rem;
+            color: var(--primary-red);
+            margin-bottom: 1rem;
+        }
+
+        .stat-item .number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(to right, var(--text-white), var(--primary-red));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .stat-item .label {
+            font-size: 1rem;
+            color: var(--text-gray);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Декоративные элементы */
+        .hero-decoration {
+            position: absolute;
+            width: 500px;
+            height: 500px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(229, 9, 20, 0.15) 0%, transparent 70%);
+            filter: blur(50px);
+            z-index: 1;
+        }
+
+        .decoration-1 {
+            top: 10%;
+            left: 5%;
+            animation: float 8s ease-in-out infinite;
+        }
+
+        .decoration-2 {
+            bottom: 15%;
+            right: 5%;
+            animation: float 10s ease-in-out infinite reverse;
+        }
+
+        /* Адаптивность */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 3rem;
+            }
+            
+            .hero p {
+                font-size: 1.2rem;
+            }
+            
+            .cta-button {
+                padding: 1rem 2.5rem;
+                font-size: 1.1rem;
+            }
+            
+            .hero-stats {
+                gap: 2rem;
+            }
+            
+            .stat-item {
+                min-width: 140px;
+                padding: 1rem 1.5rem;
+            }
+            
+            .stat-item .number {
+                font-size: 2rem;
+            }
+            
+            .hero-decoration {
+                display: none;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero-stats {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .stat-item {
+                width: 100%;
+                max-width: 200px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Герой секция -->
+    <section id="home" class="hero">
+        <!-- Декоративные элементы -->
+        <div class="hero-decoration decoration-1"></div>
+        <div class="hero-decoration decoration-2"></div>
+        
+        <!-- Анимированные частицы -->
+        <div class="particles" id="particles-container"></div>
+        
+        <div class="hero-content animated fade-in-up">
+            <h1>
+                <span class="typing-text">Премиум услуги на FunPay</span>
+            </h1>
+            <p>Профессиональный бустинг и продажа игровых ценностей с гарантией качества и быстрой доставкой. Доверьтесь экспертам с более чем 3-летним опытом!</p>
+            
+            <a href="#services" class="cta-button pulse">
+                Посмотреть услуги <i class="fas fa-arrow-right"></i>
+            </a>
+            
+            <div class="hero-stats">
+                <div class="stat-item animated fade-in-left" style="animation-delay: 0.5s;">
+                    <i class="fas fa-users"></i>
+                    <div class="number">500+</div>
+                    <div class="label">Довольных клиентов</div>
+                </div>
+                <div class="stat-item animated fade-in-up" style="animation-delay: 0.7s;">
+                    <i class="fas fa-star"></i>
+                    <div class="number">4.9/5</div>
+                    <div class="label">Рейтинг качества</div>
+                </div>
+                <div class="stat-item animated fade-in-right" style="animation-delay: 0.9s;">
+                    <i class="fas fa-bolt"></i>
+                    <div class="number">24/7</div>
+                    <div class="label">Поддержка</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Заглушка для следующей секции -->
+    <section id="services" style="height: 0vh; padding: 2rem; display: flex; align-items: center; justify-content: center; background: var(--secondary-black);">
+        <h2 style="font-size: 2.5rem;"></h2>
+    </section>
+
+    <script>
+        // Создание анимированных частиц
+        function createParticles() {
+            const container = document.getElementById('particles-container');
+            const particleCount = 25;
+            
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.classList.add('particle');
+                
+                // Случайные начальные позиции
+                const startX = Math.random() * 100;
+                const startY = Math.random() * 100;
+                
+                // Случайное движение
+                const moveX = (Math.random() - 0.5) * 200;
+                const moveY = (Math.random() - 0.5) * 200;
+                
+                // Случайная задержка и продолжительность
+                const delay = Math.random() * 5;
+                const duration = 5 + Math.random() * 5;
+                
+                particle.style.left = `${startX}%`;
+                particle.style.top = `${startY}%`;
+                particle.style.setProperty('--move-x', `${moveX}px`);
+                particle.style.setProperty('--move-y', `${moveY}px`);
+                particle.style.animationDelay = `${delay}s`;
+                particle.style.animationDuration = `${duration}s`;
+                
+                // Случайный размер
+                const size = 2 + Math.random() * 4;
+                particle.style.width = `${size}px`;
+                particle.style.height = `${size}px`;
+                
+                // Случайная прозрачность
+                const opacity = 0.3 + Math.random() * 0.7;
+                particle.style.opacity = opacity;
+                
+                container.appendChild(particle);
+            }
+        }
+        
+        // Анимация появления элементов при загрузке
+        document.addEventListener('DOMContentLoaded', function() {
+            createParticles();
+            
+            const animatedElements = document.querySelectorAll('.animated');
+            
+            animatedElements.forEach((element, index) => {
+                // Установка задержки для каждого элемента
+                element.style.animationDelay = `${index * 0.2}s`;
+                
+                // Запуск анимации
+                const animationClass = Array.from(element.classList).find(cls => 
+                    cls.startsWith('fade-in') || cls === 'pulse' || cls === 'float'
+                );
+                
+                if (animationClass) {
+                    element.classList.add(animationClass);
+                }
+            });
+            
+            // Плавная прокрутка для кнопки CTA
+            document.querySelector('.cta-button').addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
+
+    <!-- Обо мне -->
+ <!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ShizzyBoost - Обо мне</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-black: #0a0a0a;
+            --secondary-black: #1a1a1a;
+            --accent-black: #2a2a2a;
+            --primary-red: #e50914;
+            --secondary-red: #b2070f;
+            --accent-red: #ff2e2e;
+            --text-white: #f5f5f5;
+            --text-gray: #a0a0a0;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--primary-black);
+            color: var(--text-white);
+            overflow-x: hidden;
+        }
+
+        /* Премиум анимации */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(80px) scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        @keyframes fadeInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-80px) rotate(-5deg);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0) rotate(0);
+            }
+        }
+
+        @keyframes fadeInRight {
+            from {
+                opacity: 0;
+                transform: translateX(80px) rotate(5deg);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0) rotate(0);
+            }
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+                box-shadow: 0 0 0 0 rgba(229, 9, 20, 0.7);
+            }
+            70% {
+                transform: scale(1.05);
+                box-shadow: 0 0 0 20px rgba(229, 9, 20, 0);
+            }
+            100% {
+                transform: scale(1);
+                box-shadow: 0 0 0 0 rgba(229, 9, 20, 0);
+            }
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0) rotate(0);
+            }
+            33% {
+                transform: translateY(-15px) rotate(2deg);
+            }
+            66% {
+                transform: translateY(-8px) rotate(-1deg);
+            }
+        }
+
+        @keyframes glow {
+            0% {
+                filter: drop-shadow(0 0 5px var(--primary-red));
+            }
+            50% {
+                filter: drop-shadow(0 0 20px var(--accent-red)) drop-shadow(0 0 30px var(--accent-red));
+            }
+            100% {
+                filter: drop-shadow(0 0 5px var(--primary-red));
+            }
+        }
+
+        @keyframes gradientShift {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        .animated {
+            opacity: 0;
+            transition: opacity 0.8s, transform 0.8s;
+        }
+
+        .fade-in-up {
+            animation: fadeInUp 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+        }
+
+        .fade-in-left {
+            animation: fadeInLeft 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+        }
+
+        .fade-in-right {
+            animation: fadeInRight 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+        }
+
+        .pulse {
+            animation: pulse 3s infinite;
+        }
+
+        .float {
+            animation: float 6s ease-in-out infinite;
+        }
+
+        /* Секция "Обо мне" */
+        .about {
+            background: 
+                radial-gradient(circle at 10% 20%, rgba(229, 9, 20, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 90% 80%, rgba(229, 9, 20, 0.1) 0%, transparent 50%),
+                linear-gradient(135deg, var(--secondary-black) 0%, var(--primary-black) 100%);
+            padding: 8rem 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 5rem;
+            position: relative;
+        }
+
+        .section-title h2 {
+            font-size: 3.5rem;
+            display: inline-block;
+            position: relative;
+            background: linear-gradient(135deg, var(--text-white) 0%, var(--primary-red) 50%, var(--accent-red) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-size: 200% 200%;
+            animation: gradientShift 6s ease infinite;
+            text-shadow: 0 0 30px rgba(229, 9, 20, 0.3);
+        }
+
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 120px;
+            height: 4px;
+            background: linear-gradient(90deg, transparent, var(--primary-red), transparent);
+            border-radius: 2px;
+            box-shadow: 0 0 15px rgba(229, 9, 20, 0.5);
+        }
+
+        .about-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .about-text {
+            background: rgba(42, 42, 42, 0.7);
+            border-radius: 25px;
+            padding: 3rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            position: relative;
+            overflow: hidden;
+            transition: all 0.5s;
+        }
+
+        .about-text::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(229, 9, 20, 0.1) 0%, transparent 50%);
+            opacity: 0;
+            transition: opacity 0.5s;
+        }
+
+        .about-text:hover {
+            border-color: var(--primary-red);
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(229, 9, 20, 0.25);
+        }
+
+        .about-text:hover::before {
+            opacity: 1;
+        }
+
+        .about-text h3 {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            color: var(--primary-red);
+            position: relative;
+            display: inline-block;
+        }
+
+        .about-text h3::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 60px;
+            height: 3px;
+            background: var(--primary-red);
+            transition: width 0.4s;
+        }
+
+        .about-text:hover h3::after {
+            width: 120px;
+        }
+
+        .about-text p {
+            margin-bottom: 1.5rem;
+            line-height: 1.7;
+            color: var(--text-gray);
+            font-size: 1.1rem;
+        }
+
+        .about-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+        }
+
+        .stat {
+            background: rgba(42, 42, 42, 0.7);
+            border-radius: 20px;
+            padding: 2.5rem 1.5rem;
+            text-align: center;
+            transition: all 0.5s;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(15px);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stat::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(229, 9, 20, 0.1) 0%, transparent 50%);
+            opacity: 0;
+            transition: opacity 0.5s;
+        }
+
+        .stat:hover {
+            transform: translateY(-10px) scale(1.05);
+            border-color: var(--primary-red);
+            box-shadow: 0 15px 35px rgba(229, 9, 20, 0.3);
+        }
+
+        .stat:hover::before {
+            opacity: 1;
+        }
+
+        .stat i {
+            font-size: 3rem;
+            color: var(--primary-red);
+            margin-bottom: 1.5rem;
+            transition: all 0.5s;
+        }
+
+        .stat:hover i {
+            transform: scale(1.2);
+            animation: glow 2s infinite;
+        }
+
+        .stat h4 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(to right, var(--text-white), var(--primary-red));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: bold;
+        }
+
+        .stat p {
+            color: var(--text-gray);
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Дополнительные элементы */
+        .experience-badge {
+            position: absolute;
+            top: -20px;
+            right: -20px;
+            background: linear-gradient(135deg, var(--primary-red) 0%, var(--accent-red) 100%);
+            color: var(--text-white);
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            font-weight: bold;
+            font-size: 1.1rem;
+            box-shadow: 0 10px 25px rgba(229, 9, 20, 0.4);
+            transform: rotate(5deg);
+            animation: float 4s ease-in-out infinite;
+        }
+
+        .trust-signature {
+            display: flex;
+            align-items: center;
+            margin-top: 2rem;
+            padding: 1.5rem;
+            background: rgba(229, 9, 20, 0.1);
+            border-radius: 15px;
+            border-left: 4px solid var(--primary-red);
+        }
+
+        .trust-signature i {
+            font-size: 2rem;
+            color: var(--primary-red);
+            margin-right: 1rem;
+        }
+
+        .trust-signature p {
+            margin: 0;
+            font-style: italic;
+            color: var(--text-white);
+        }
+
+        /* Декоративные элементы */
+        .about-decoration {
+            position: absolute;
+            width: 400px;
+            height: 400px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(229, 9, 20, 0.15) 0%, transparent 70%);
+            filter: blur(40px);
+            z-index: 1;
+        }
+
+        .decoration-1 {
+            top: 10%;
+            left: 5%;
+            animation: float 8s ease-in-out infinite;
+        }
+
+        .decoration-2 {
+            bottom: 15%;
+            right: 5%;
+            animation: float 10s ease-in-out infinite reverse;
+        }
+
+        /* Адаптивность */
+        @media (max-width: 1024px) {
+            .about-content {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+            
+            .about-stats {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .about {
+                padding: 5rem 1rem;
+            }
+            
+            .section-title h2 {
+                font-size: 2.5rem;
+            }
+            
+            .about-text {
+                padding: 2rem 1.5rem;
+            }
+            
+            .about-text h3 {
+                font-size: 1.7rem;
+            }
+            
+            .about-stats {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+            
+            .stat {
+                padding: 2rem 1rem;
+            }
+            
+            .experience-badge {
+                position: relative;
+                top: 0;
+                right: 0;
+                margin-bottom: 1rem;
+                text-align: center;
+            }
+            
+            .about-decoration {
+                display: none;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .about-stats {
+                grid-template-columns: 1fr;
+            }
+            
+            .stat h4 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Секция "Обо мне" -->
+    <section id="about" class="about">
+        <!-- Декоративные элементы -->
+        <div class="about-decoration decoration-1"></div>
+        <div class="about-decoration decoration-2"></div>
+        
+        <div class="section-title">
+            <h2 class="animated fade-in-up">Обо мне</h2>
+        </div>
+        
+        <div class="about-content">
+            <div class="about-text animated fade-in-left">
+                <div class="experience-badge pulse">
+                    <i class="fas fa-award"></i> 3+ года опыта
+                </div>
+                
+                <h3>Профессионал с многолетним опытом</h3>
+                <p>Я занимаюсь продажей игровых ценностей и предоставлением услуг бустинга на FunPay более 3 лет. За это время я помог сотням игроков достичь их целей в играх и улучшить игровой опыт.</p>
+                <p>Моя репутация - это мой главный актив. Я гарантирую честность, конфиденциальность и премиум качество предоставляемых услуг. Все сделки проводятся максимально безопасно и прозрачно.</p>
+                <p>Я постоянно совершенствую свои навыки и слежу за изменениями в игровой индустрии, чтобы предлагать клиентам только актуальные и востребованные услуги высшего качества.</p>
+                
+                <div class="trust-signature">
+                    <i class="fas fa-shield-alt"></i>
+                    <p>"Ваше доверие - моя самая ценная награда. Я делаю всё возможное, чтобы его оправдать."</p>
+                </div>
+            </div>
+            
+            <div class="about-stats animated fade-in-right">
+                <div class="stat">
+                    <i class="fas fa-users float"></i>
+                    <h4>500+</h4>
+                    <p>Довольных клиентов</p>
+                </div>
+                <div class="stat">
+                    <i class="fas fa-star float" style="animation-delay: 0.5s;"></i>
+                    <h4>4.9/5</h4>
+                    <p>Средний рейтинг</p>
+                </div>
+                <div class="stat">
+                    <i class="fas fa-check-circle float" style="animation-delay: 1s;"></i>
+                    <h4>1000+</h4>
+                    <p>Успешных сделок</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Инициализация анимаций
+            const animatedElements = document.querySelectorAll('.animated');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const animationType = entry.target.classList[1];
+                        const delay = entry.target.style.animationDelay || '0s';
+                        entry.target.style.animationDelay = delay;
+                        entry.target.classList.add(animationType);
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { 
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            });
+            
+            animatedElements.forEach(element => {
+                observer.observe(element);
+            });
+            
+            // Интерактивные эффекты для статистики
+            const stats = document.querySelectorAll('.stat');
+            
+            stats.forEach(stat => {
+                stat.addEventListener('mouseenter', function() {
+                    this.style.zIndex = '10';
+                });
+                
+                stat.addEventListener('mouseleave', function() {
+                    this.style.zIndex = '1';
+                });
+            });
+        });
+    </script>
+</body>
+</html>
+
+    <!-- Услуги -->
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ShizzyBoost - Услуги</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-black: #0a0a0a;
+            --secondary-black: #1a1a1a;
+            --accent-black: #2a2a2a;
+            --primary-red: #e50914;
+            --secondary-red: #b2070f;
+            --accent-red: #ff2e2e;
+            --text-white: #f5f5f5;
+            --text-gray: #a0a0a0;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--primary-black);
+            color: var(--text-white);
+            overflow-x: hidden;
+        }
+
+        /* Премиум анимации */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(80px) scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+                box-shadow: 0 0 0 0 rgba(229, 9, 20, 0.7);
+            }
+            70% {
+                transform: scale(1.05);
+                box-shadow: 0 0 0 20px rgba(229, 9, 20, 0);
+            }
+            100% {
+                transform: scale(1);
+                box-shadow: 0 0 0 0 rgba(229, 9, 20, 0);
+            }
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0) rotate(0);
+            }
+            33% {
+                transform: translateY(-15px) rotate(2deg);
+            }
+            66% {
+                transform: translateY(-8px) rotate(-1deg);
+            }
+        }
+
+        @keyframes glow {
+            0% {
+                filter: drop-shadow(0 0 5px var(--primary-red));
+            }
+            50% {
+                filter: drop-shadow(0 0 20px var(--accent-red)) drop-shadow(0 0 30px var(--accent-red));
+            }
+            100% {
+                filter: drop-shadow(0 0 5px var(--primary-red));
+            }
+        }
+
+        @keyframes gradientShift {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        @keyframes shimmer {
+            0% {
+                background-position: -1000px 0;
+            }
+            100% {
+                background-position: 1000px 0;
+            }
+        }
+
+        .animated {
+            opacity: 0;
+            transition: opacity 0.8s, transform 0.8s;
+        }
+
+        .fade-in-up {
+            animation: fadeInUp 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+        }
+
+        .pulse {
+            animation: pulse 3s infinite;
+        }
+
+        .float {
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .glow {
+            animation: glow 4s infinite;
+        }
+
+        /* Секция услуг */
+        .services {
+            background: 
+                radial-gradient(circle at 20% 30%, rgba(229, 9, 20, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 80% 70%, rgba(229, 9, 20, 0.1) 0%, transparent 50%),
+                linear-gradient(135deg, var(--primary-black) 0%, var(--secondary-black) 100%);
+            padding: 8rem 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 5rem;
+            position: relative;
+        }
+
+        .section-title h2 {
+            font-size: 3.5rem;
+            display: inline-block;
+            position: relative;
+            background: linear-gradient(135deg, var(--text-white) 0%, var(--primary-red) 50%, var(--accent-red) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-size: 200% 200%;
+            animation: gradientShift 6s ease infinite;
+            text-shadow: 0 0 30px rgba(229, 9, 20, 0.3);
+        }
+
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 120px;
+            height: 4px;
+            background: linear-gradient(90deg, transparent, var(--primary-red), transparent);
+            border-radius: 2px;
+            box-shadow: 0 0 15px rgba(229, 9, 20, 0.5);
+        }
+
+        .services-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 3rem;
+        }
+
+        .service-card {
+            background: rgba(42, 42, 42, 0.7);
+            border-radius: 25px;
+            padding: 3rem 2.5rem;
+            text-align: center;
+            transition: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            position: relative;
+            overflow: hidden;
+            transform-style: preserve-3d;
+            perspective: 1000px;
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(229, 9, 20, 0.1) 0%, transparent 50%);
+            opacity: 0;
+            transition: opacity 0.6s;
+        }
+
+        .service-card::after {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(45deg, var(--primary-red), transparent, var(--accent-red), transparent, var(--primary-red));
+            background-size: 400% 400%;
+            border-radius: 27px;
+            z-index: -1;
+            opacity: 0;
+            transition: opacity 0.6s;
+            animation: gradientShift 4s ease infinite;
+        }
+
+        .service-card:hover {
+            transform: translateY(-15px) rotateX(5deg) scale(1.03);
+            border-color: var(--primary-red);
+            box-shadow: 0 25px 50px rgba(229, 9, 20, 0.3);
+        }
+
+        .service-card:hover::before {
+            opacity: 1;
+        }
+
+        .service-card:hover::after {
+            opacity: 1;
+        }
+
+        .service-icon {
+            font-size: 4.5rem;
+            color: var(--primary-red);
+            margin-bottom: 2rem;
+            transition: all 0.6s;
+            display: inline-block;
+            position: relative;
+        }
+
+        .service-card:hover .service-icon {
+            transform: scale(1.2) rotate(10deg);
+            animation: glow 2s infinite;
+        }
+
+        .service-card h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            color: var(--text-white);
+            position: relative;
+            display: inline-block;
+        }
+
+        .service-card h3::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 50px;
+            height: 2px;
+            background: var(--primary-red);
+            transition: width 0.4s;
+        }
+
+        .service-card:hover h3::after {
+            width: 100px;
+        }
+
+        .service-card p {
+            color: var(--text-gray);
+            margin-bottom: 2rem;
+            line-height: 1.7;
+            font-size: 1.1rem;
+            min-height: 80px;
+        }
+
+        .service-price {
+            font-size: 2.2rem;
+            font-weight: bold;
+            margin-bottom: 2rem;
+            background: linear-gradient(135deg, var(--primary-red) 0%, var(--accent-red) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            position: relative;
+            display: inline-block;
+        }
+
+        .service-price::before {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--primary-red), transparent);
+            opacity: 0.5;
+        }
+
+        .service-button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, var(--primary-red) 0%, var(--accent-red) 100%);
+            color: var(--text-white);
+            padding: 1.2rem 2.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            border: 2px solid transparent;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 10px 25px rgba(229, 9, 20, 0.3);
+            width: 100%;
+            max-width: 200px;
+            margin: 0 auto;
+        }
+
+        .service-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.7s;
+        }
+
+        .service-button:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 15px 35px rgba(229, 9, 20, 0.5);
+            background: linear-gradient(135deg, var(--accent-red) 0%, var(--primary-red) 100%);
+        }
+
+        .service-button:hover::before {
+            left: 100%;
+        }
+
+        .service-button i {
+            margin-left: 0.8rem;
+            transition: transform 0.4s;
+        }
+
+        .service-button:hover i {
+            transform: translateX(5px) scale(1.2);
+        }
+
+        /* Дополнительные элементы */
+        .service-badge {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: linear-gradient(135deg, var(--primary-red) 0%, var(--accent-red) 100%);
+            color: var(--text-white);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 5px 15px rgba(229, 9, 20, 0.4);
+            animation: pulse 2s infinite;
+        }
+
+        .service-features {
+            margin: 1.5rem 0;
+            text-align: left;
+        }
+
+        .service-feature {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.8rem;
+            color: var(--text-gray);
+            font-size: 0.9rem;
+        }
+
+        .service-feature i {
+            color: var(--primary-red);
+            margin-right: 0.8rem;
+            font-size: 0.8rem;
+        }
+
+        /* Декоративные элементы */
+        .services-decoration {
+            position: absolute;
+            width: 400px;
+            height: 400px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(229, 9, 20, 0.15) 0%, transparent 70%);
+            filter: blur(40px);
+            z-index: 1;
+        }
+
+        .decoration-1 {
+            top: 10%;
+            left: 5%;
+            animation: float 8s ease-in-out infinite;
+        }
+
+        .decoration-2 {
+            bottom: 15%;
+            right: 5%;
+            animation: float 10s ease-in-out infinite reverse;
+        }
+
+        /* Адаптивность */
+        @media (max-width: 1024px) {
+            .services-container {
+                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+                gap: 2rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .services {
+                padding: 5rem 1rem;
+            }
+            
+            .section-title h2 {
+                font-size: 2.5rem;
+            }
+            
+            .service-card {
+                padding: 2.5rem 2rem;
+            }
+            
+            .service-icon {
+                font-size: 3.5rem;
+            }
+            
+            .service-price {
+                font-size: 2rem;
+            }
+            
+            .services-decoration {
+                display: none;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .services-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .service-card {
+                padding: 2rem 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Секция услуг -->
+    <section id="services" class="services">
+        <!-- Декоративные элементы -->
+        <div class="services-decoration decoration-1"></div>
+        <div class="services-decoration decoration-2"></div>
+        
+        <div class="section-title">
+            <h2 class="animated fade-in-up">Мои услуги</h2>
+        </div>
+        
+        <div class="services-container">
+            <div class="service-card animated fade-in-up">
+                <div class="service-badge">Популярно</div>
+                <div class="service-icon float">
+                    <i class="fas fa-shield-alt"></i>
+                </div>
+                <h3>Бустинг аккаунтов</h3>
+                <p>Профессиональное повышение ранга, уровня или рейтинга в популярных играх. Быстро, безопасно и с гарантией результата.</p>
+                
+                <div class="service-features">
+                    <div class="service-feature">
+                        <i class="fas fa-check"></i>
+                        <span>Ручное выполнение</span>
+                    </div>
+                    <div class="service-feature">
+                        <i class="fas fa-check"></i>
+                        <span>Безопасный доступ</span>
+                    </div>
+                    <div class="service-feature">
+                        <i class="fas fa-check"></i>
+                        <span>Гарантия качества</span>
+                    </div>
+                </div>
+                
+                <div class="service-price">от 500 руб.</div>
+                <a href="#" class="service-button pulse">
+                    Заказать <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+            
+            <div class="service-card animated fade-in-up" style="animation-delay: 0.2s;">
+                <div class="service-badge">Выгодно</div>
+                <div class="service-icon float" style="animation-delay: 0.5s;">
+                    <i class="fas fa-coins"></i>
+                </div>
+                <h3>Игровая валюта</h3>
+                <p>Продажа золота, кредитов, рубинов и другой игровой валюты по самым выгодным ценам на рынке. Мгновенная доставка.</p>
+                
+                <div class="service-features">
+                    <div class="service-feature">
+                        <i class="fas fa-check"></i>
+                        <span>Мгновенная доставка</span>
+                    </div>
+                    <div class="service-feature">
+                        <i class="fas fa-check"></i>
+                        <span>Лучшие цены</span>
+                    </div>
+                    <div class="service-feature">
+                        <i class="fas fa-check"></i>
+                        <span>Большие объемы</span>
+                    </div>
+                </div>
+                
+                <div class="service-price">от 100 руб.</div>
+                <a href="#" class="service-button pulse" style="animation-delay: 0.3s;">
+                    Заказать <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+            
+            <div class="service-card animated fade-in-up" style="animation-delay: 0.4s;">
+                <div class="service-badge">Эксклюзив</div>
+                <div class="service-icon float" style="animation-delay: 1s;">
+                    <i class="fas fa-box-open"></i>
+                </div>
+                <h3>Игровые предметы</h3>
+                <p>Продажа редких и эксклюзивных предметов, снаряжения и ресурсов для различных игр. Уникальные вещи по доступным ценам.</p>
+                
+                <div class="service-features">
+                    <div class="service-feature">
+                        <i class="fas fa-check"></i>
+                        <span>Редкие предметы</span>
+                    </div>
+                    <div class="service-feature">
+                        <i class="fas fa-check"></i>
+                        <span>Эксклюзивные вещи</span>
+                    </div>
+                    <div class="service-feature">
+                        <i class="fas fa-check"></i>
+                        <span>Быстрая сделка</span>
+                    </div>
+                </div>
+                
+                <div class="service-price">от 200 руб.</div>
+                <a href="#" class="service-button pulse" style="animation-delay: 0.6s;">
+                    Заказать <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Инициализация анимаций
+            const animatedElements = document.querySelectorAll('.animated');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const animationType = entry.target.classList[1];
+                        const delay = entry.target.style.animationDelay || '0s';
+                        entry.target.style.animationDelay = delay;
+                        entry.target.classList.add(animationType);
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { 
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            });
+            
+            animatedElements.forEach(element => {
+                observer.observe(element);
+            });
+            
+            // Интерактивные эффекты для карточек услуг
+            const serviceCards = document.querySelectorAll('.service-card');
+            
+            serviceCards.forEach(card => {
+                card.addEventListener('mouseenter', function() {
+                    this.style.zIndex = '10';
+                });
+                
+                card.addEventListener('mouseleave', function() {
+                    this.style.zIndex = '1';
+                });
+                
+                // Эффект параллакса при движении мыши
+                card.addEventListener('mousemove', function(e) {
+                    const cardRect = this.getBoundingClientRect();
+                    const cardCenterX = cardRect.left + cardRect.width / 2;
+                    const cardCenterY = cardRect.top + cardRect.height / 2;
+                    
+                    const mouseX = e.clientX - cardCenterX;
+                    const mouseY = e.clientY - cardCenterY;
+                    
+                    const rotateY = mouseX / 50;
+                    const rotateX = -mouseY / 50;
+                    
+                    this.style.transform = `translateY(-15px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.03)`;
+                });
+                
+                card.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(-15px) rotateX(5deg) scale(1.03)';
+                });
+            });
+        });
+    </script>
+</body>
+</html>
+
+    <!-- Отзывы -->
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ShizzyBoost - Отзывы</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-black: #0a0a0a;
+            --secondary-black: #1a1a1a;
+            --accent-black: #2a2a2a;
+            --primary-red: #e50914;
+            --secondary-red: #b2070f;
+            --accent-red: #ff2e2e;
+            --text-white: #f5f5f5;
+            --text-gray: #a0a0a0;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--primary-black);
+            color: var(--text-white);
+            overflow-x: hidden;
+        }
+
+        /* Премиум анимации */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(80px) scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        @keyframes fadeInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-80px) rotate(-5deg);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0) rotate(0);
+            }
+        }
+
+        @keyframes fadeInRight {
+            from {
+                opacity: 0;
+                transform: translateX(80px) rotate(5deg);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0) rotate(0);
+            }
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+                box-shadow: 0 0 0 0 rgba(229, 9, 20, 0.7);
+            }
+            70% {
+                transform: scale(1.05);
+                box-shadow: 0 0 0 20px rgba(229, 9, 20, 0);
+            }
+            100% {
+                transform: scale(1);
+                box-shadow: 0 0 0 0 rgba(229, 9, 20, 0);
+            }
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0) rotate(0);
+            }
+            33% {
+                transform: translateY(-15px) rotate(2deg);
+            }
+            66% {
+                transform: translateY(-8px) rotate(-1deg);
+            }
+        }
+
+        @keyframes glow {
+            0% {
+                filter: drop-shadow(0 0 5px var(--primary-red));
+            }
+            50% {
+                filter: drop-shadow(0 0 20px var(--accent-red)) drop-shadow(0 0 30px var(--accent-red));
+            }
+            100% {
+                filter: drop-shadow(0 0 5px var(--primary-red));
+            }
+        }
+
+        @keyframes gradientShift {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        @keyframes starPulse {
+            0%, 100% {
+                transform: scale(1);
+                color: var(--primary-red);
+            }
+            50% {
+                transform: scale(1.2);
+                color: var(--accent-red);
+            }
+        }
+
+        .animated {
+            opacity: 0;
+            transition: opacity 0.8s, transform 0.8s;
+        }
+
+        .fade-in-up {
+            animation: fadeInUp 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+        }
+
+        .fade-in-left {
+            animation: fadeInLeft 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+        }
+
+        .fade-in-right {
+            animation: fadeInRight 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+        }
+
+        .pulse {
+            animation: pulse 3s infinite;
+        }
+
+        .float {
+            animation: float 6s ease-in-out infinite;
+        }
+
+        /* Секция отзывов */
+        .reviews {
+            background: 
+                radial-gradient(circle at 20% 30%, rgba(229, 9, 20, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 80% 70%, rgba(229, 9, 20, 0.1) 0%, transparent 50%),
+                linear-gradient(135deg, var(--secondary-black) 0%, var(--primary-black) 100%);
+            padding: 8rem 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 5rem;
+            position: relative;
+        }
+
+        .section-title h2 {
+            font-size: 3.5rem;
+            display: inline-block;
+            position: relative;
+            background: linear-gradient(135deg, var(--text-white) 0%, var(--primary-red) 50%, var(--accent-red) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-size: 200% 200%;
+            animation: gradientShift 6s ease infinite;
+            text-shadow: 0 0 30px rgba(229, 9, 20, 0.3);
+        }
+
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 120px;
+            height: 4px;
+            background: linear-gradient(90deg, transparent, var(--primary-red), transparent);
+            border-radius: 2px;
+            box-shadow: 0 0 15px rgba(229, 9, 20, 0.5);
+        }
+
+        .reviews-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 3rem;
+        }
+
+        .review-card {
+            background: rgba(42, 42, 42, 0.7);
+            border-radius: 25px;
+            padding: 3rem 2.5rem;
+            transition: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            position: relative;
+            overflow: hidden;
+            transform-style: preserve-3d;
+            perspective: 1000px;
+        }
+
+        .review-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(229, 9, 20, 0.1) 0%, transparent 50%);
+            opacity: 0;
+            transition: opacity 0.6s;
+        }
+
+        .review-card::after {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(45deg, var(--primary-red), transparent, var(--accent-red), transparent, var(--primary-red));
+            background-size: 400% 400%;
+            border-radius: 27px;
+            z-index: -1;
+            opacity: 0;
+            transition: opacity 0.6s;
+            animation: gradientShift 4s ease infinite;
+        }
+
+        .review-card:hover {
+            transform: translateY(-15px) rotateX(5deg) scale(1.03);
+            border-color: var(--primary-red);
+            box-shadow: 0 25px 50px rgba(229, 9, 20, 0.3);
+        }
+
+        .review-card:hover::before {
+            opacity: 1;
+        }
+
+        .review-card:hover::after {
+            opacity: 1;
+        }
+
+        .review-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            position: relative;
+        }
+
+        .review-avatar {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary-red) 0%, var(--accent-red) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 1.5rem;
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--text-white);
+            box-shadow: 0 10px 25px rgba(229, 9, 20, 0.4);
+            transition: all 0.5s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .review-avatar::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.7s;
+        }
+
+        .review-card:hover .review-avatar {
+            transform: scale(1.1);
+            animation: glow 2s infinite;
+        }
+
+        .review-card:hover .review-avatar::before {
+            left: 100%;
+        }
+
+        .review-info h4 {
+            font-size: 1.4rem;
+            margin-bottom: 0.5rem;
+            color: var(--text-white);
+            position: relative;
+        }
+
+        .review-info h4::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 30px;
+            height: 2px;
+            background: var(--primary-red);
+            transition: width 0.4s;
+        }
+
+        .review-card:hover .review-info h4::after {
+            width: 60px;
+        }
+
+        .review-info p {
+            color: var(--text-gray);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .review-stars {
+            margin-bottom: 1.5rem;
+            display: flex;
+            gap: 0.3rem;
+        }
+
+        .review-stars i {
+            color: var(--primary-red);
+            font-size: 1.2rem;
+            transition: all 0.3s;
+        }
+
+        .review-card:hover .review-stars i {
+            animation: starPulse 1s ease-in-out;
+        }
+
+        .review-card:hover .review-stars i:nth-child(2) {
+            animation-delay: 0.1s;
+        }
+
+        .review-card:hover .review-stars i:nth-child(3) {
+            animation-delay: 0.2s;
+        }
+
+        .review-card:hover .review-stars i:nth-child(4) {
+            animation-delay: 0.3s;
+        }
+
+        .review-card:hover .review-stars i:nth-child(5) {
+            animation-delay: 0.4s;
+        }
+
+        .review-text {
+            color: var(--text-gray);
+            line-height: 1.7;
+            font-size: 1.1rem;
+            font-style: italic;
+            position: relative;
+            padding-left: 1.5rem;
+        }
+
+        .review-text::before {
+            content: '"';
+            position: absolute;
+            left: 0;
+            top: -10px;
+            font-size: 3rem;
+            color: var(--primary-red);
+            opacity: 0.5;
+            font-family: serif;
+        }
+
+        .review-date {
+            margin-top: 1.5rem;
+            text-align: right;
+            color: var(--text-gray);
+            font-size: 0.8rem;
+            opacity: 0.7;
+        }
+
+        /* Дополнительные элементы */
+        .review-badge {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: linear-gradient(135deg, var(--primary-red) 0%, var(--accent-red) 100%);
+            color: var(--text-white);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            box-shadow: 0 5px 15px rgba(229, 9, 20, 0.4);
+            animation: pulse 2s infinite;
+        }
+
+        .game-icon {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            font-size: 2rem;
+            opacity: 0.3;
+            transition: all 0.5s;
+        }
+
+        .review-card:hover .game-icon {
+            opacity: 0.7;
+            transform: scale(1.2);
+        }
+
+        /* Декоративные элементы */
+        .reviews-decoration {
+            position: absolute;
+            width: 400px;
+            height: 400px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(229, 9, 20, 0.15) 0%, transparent 70%);
+            filter: blur(40px);
+            z-index: 1;
+        }
+
+        .decoration-1 {
+            top: 10%;
+            left: 5%;
+            animation: float 8s ease-in-out infinite;
+        }
+
+        .decoration-2 {
+            bottom: 15%;
+            right: 5%;
+            animation: float 10s ease-in-out infinite reverse;
+        }
+
+        /* Адаптивность */
+        @media (max-width: 1024px) {
+            .reviews-container {
+                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+                gap: 2rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .reviews {
+                padding: 5rem 1rem;
+            }
+            
+            .section-title h2 {
+                font-size: 2.5rem;
+            }
+            
+            .review-card {
+                padding: 2.5rem 2rem;
+            }
+            
+            .review-avatar {
+                width: 60px;
+                height: 60px;
+                font-size: 1.3rem;
+            }
+            
+            .reviews-decoration {
+                display: none;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .reviews-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .review-card {
+                padding: 2rem 1.5rem;
+            }
+            
+            .review-header {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .review-avatar {
+                margin-right: 0;
+                margin-bottom: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Секция отзывов -->
+    <section id="reviews" class="reviews">
+        <!-- Декоративные элементы -->
+        <div class="reviews-decoration decoration-1"></div>
+        <div class="reviews-decoration decoration-2"></div>
+        
+        <div class="section-title">
+            <h2 class="animated fade-in-up">Отзывы клиентов</h2>
+        </div>
+        
+        <div class="reviews-container">
+            <div class="review-card animated fade-in-left">
+                <div class="review-badge">Проверенный</div>
+                <div class="review-header">
+                    <div class="review-avatar float">
+                        АК
+                    </div>
+                    <div class="review-info">
+                        <h4>Алексей К.</h4>
+                        <p>World of Warcraft</p>
+                    </div>
+                </div>
+                <div class="review-stars">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                </div>
+                <p class="review-text">Заказывал золото для WoW. Все прошло быстро и без проблем. Продавец вежливый, отвечает оперативно. Уровень сервиса на высоте! Рекомендую всем игрокам.</p>
+                <div class="review-date">2 недели назад</div>
+                <div class="game-icon">
+                    <i class="fab fa-wow"></i>
+                </div>
+            </div>
+            
+            <div class="review-card animated fade-in-up" style="animation-delay: 0.2s;">
+                <div class="review-badge">Постоянный</div>
+                <div class="review-header">
+                    <div class="review-avatar float" style="animation-delay: 0.5s;">
+                        МС
+                    </div>
+                    <div class="review-info">
+                        <h4>Мария С.</h4>
+                        <p>CS:GO</p>
+                    </div>
+                </div>
+                <div class="review-stars">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                </div>
+                <p class="review-text">Покупала скин для CS:GO. Цена адекватная, доставка мгновенная. Очень довольна обслуживанием! Уже третий раз обращаюсь и всегда безупречный сервис.</p>
+                <div class="review-date">3 дня назад</div>
+                <div class="game-icon">
+                    <i class="fab fa-steam"></i>
+                </div>
+            </div>
+            
+            <div class="review-card animated fade-in-right" style="animation-delay: 0.4s;">
+                <div class="review-badge">Восторг</div>
+                <div class="review-header">
+                    <div class="review-avatar float" style="animation-delay: 1s;">
+                        ДП
+                    </div>
+                    <div class="review-info">
+                        <h4>Дмитрий П.</h4>
+                        <p>League of Legends</p>
+                    </div>
+                </div>
+                <div class="review-stars">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                </div>
+                <p class="review-text">Заказывал буст в LoL. Все сделали качественно и в оговоренные сроки. Профессиональный подход и отличная коммуникация. Буду обращаться еще!</p>
+                <div class="review-date">1 месяц назад</div>
+                <div class="game-icon">
+                    <i class="fab fa-riot-games"></i>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Инициализация анимаций
+            const animatedElements = document.querySelectorAll('.animated');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const animationType = entry.target.classList[1];
+                        const delay = entry.target.style.animationDelay || '0s';
+                        entry.target.style.animationDelay = delay;
+                        entry.target.classList.add(animationType);
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { 
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            });
+            
+            animatedElements.forEach(element => {
+                observer.observe(element);
+            });
+            
+            // Интерактивные эффекты для карточек отзывов
+            const reviewCards = document.querySelectorAll('.review-card');
+            
+            reviewCards.forEach(card => {
+                card.addEventListener('mouseenter', function() {
+                    this.style.zIndex = '10';
+                });
+                
+                card.addEventListener('mouseleave', function() {
+                    this.style.zIndex = '1';
+                });
+                
+                // Эффект параллакса при движении мыши
+                card.addEventListener('mousemove', function(e) {
+                    const cardRect = this.getBoundingClientRect();
+                    const cardCenterX = cardRect.left + cardRect.width / 2;
+                    const cardCenterY = cardRect.top + cardRect.height / 2;
+                    
+                    const mouseX = e.clientX - cardCenterX;
+                    const mouseY = e.clientY - cardCenterY;
+                    
+                    const rotateY = mouseX / 50;
+                    const rotateX = -mouseY / 50;
+                    
+                    this.style.transform = `translateY(-15px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.03)`;
+                });
+                
+                card.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(-15px) rotateX(5deg) scale(1.03)';
+                });
+            });
+        });
+    </script>
+</body>
+</html>
+    <!-- Контакты -->
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ShizzyBoost - Контакты</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-black: #0a0a0a;
+            --secondary-black: #1a1a1a;
+            --accent-black: #2a2a2a;
+            --primary-red: #e50914;
+            --secondary-red: #b2070f;
+            --accent-red: #ff2e2e;
+            --text-white: #f5f5f5;
+            --text-gray: #a0a0a0;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--primary-black);
+            color: var(--text-white);
+            overflow-x: hidden;
+        }
+
+        /* Премиум анимации */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(80px) scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        @keyframes fadeInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-80px) rotate(-5deg);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0) rotate(0);
+            }
+        }
+
+        @keyframes fadeInRight {
+            from {
+                opacity: 0;
+                transform: translateX(80px) rotate(5deg);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0) rotate(0);
+            }
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+                box-shadow: 0 0 0 0 rgba(229, 9, 20, 0.7);
+            }
+            70% {
+                transform: scale(1.05);
+                box-shadow: 0 0 0 20px rgba(229, 9, 20, 0);
+            }
+            100% {
+                transform: scale(1);
+                box-shadow: 0 0 0 0 rgba(229, 9, 20, 0);
+            }
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0) rotate(0);
+            }
+            33% {
+                transform: translateY(-15px) rotate(2deg);
+            }
+            66% {
+                transform: translateY(-8px) rotate(-1deg);
+            }
+        }
+
+        @keyframes glow {
+            0% {
+                filter: drop-shadow(0 0 5px var(--primary-red));
+            }
+            50% {
+                filter: drop-shadow(0 0 20px var(--accent-red)) drop-shadow(0 0 30px var(--accent-red));
+            }
+            100% {
+                filter: drop-shadow(0 0 5px var(--primary-red));
+            }
+        }
+
+        @keyframes gradientShift {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        @keyframes inputFocus {
+            0% {
+                box-shadow: 0 0 0 0 rgba(229, 9, 20, 0.4);
+            }
+            100% {
+                box-shadow: 0 0 0 10px rgba(229, 9, 20, 0);
+            }
+        }
+
+        .animated {
+            opacity: 0;
+            transition: opacity 0.8s, transform 0.8s;
+        }
+
+        .fade-in-up {
+            animation: fadeInUp 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+        }
+
+        .fade-in-left {
+            animation: fadeInLeft 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+        }
+
+        .fade-in-right {
+            animation: fadeInRight 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+        }
+
+        .pulse {
+            animation: pulse 3s infinite;
+        }
+
+        .float {
+            animation: float 6s ease-in-out infinite;
+        }
+
+        /* Секция контактов */
+        .contacts {
+            background: 
+                radial-gradient(circle at 20% 30%, rgba(229, 9, 20, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 80% 70%, rgba(229, 9, 20, 0.1) 0%, transparent 50%),
+                linear-gradient(135deg, var(--primary-black) 0%, var(--secondary-black) 100%);
+            padding: 8rem 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 5rem;
+            position: relative;
+        }
+
+        .section-title h2 {
+            font-size: 3.5rem;
+            display: inline-block;
+            position: relative;
+            background: linear-gradient(135deg, var(--text-white) 0%, var(--primary-red) 50%, var(--accent-red) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-size: 200% 200%;
+            animation: gradientShift 6s ease infinite;
+            text-shadow: 0 0 30px rgba(229, 9, 20, 0.3);
+        }
+
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 120px;
+            height: 4px;
+            background: linear-gradient(90deg, transparent, var(--primary-red), transparent);
+            border-radius: 2px;
+            box-shadow: 0 0 15px rgba(229, 9, 20, 0.5);
+        }
+
+        .contacts-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: start;
+        }
+
+        .contact-info {
+            background: rgba(42, 42, 42, 0.7);
+            border-radius: 25px;
+            padding: 3rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            position: relative;
+            overflow: hidden;
+            transition: all 0.5s;
+        }
+
+        .contact-info::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(229, 9, 20, 0.1) 0%, transparent 50%);
+            opacity: 0;
+            transition: opacity 0.5s;
+        }
+
+        .contact-info:hover {
+            border-color: var(--primary-red);
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(229, 9, 20, 0.25);
+        }
+
+        .contact-info:hover::before {
+            opacity: 1;
+        }
+
+        .contact-info h3 {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            color: var(--primary-red);
+            position: relative;
+            display: inline-block;
+        }
+
+        .contact-info h3::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 60px;
+            height: 3px;
+            background: var(--primary-red);
+            transition: width 0.4s;
+        }
+
+        .contact-info:hover h3::after {
+            width: 120px;
+        }
+
+        .contact-info p {
+            color: var(--text-gray);
+            line-height: 1.7;
+            font-size: 1.1rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .contact-details {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            padding: 1.5rem;
+            background: rgba(26, 26, 26, 0.5);
+            border-radius: 15px;
+            transition: all 0.4s;
+            border-left: 4px solid transparent;
+        }
+
+        .contact-item:hover {
+            border-left-color: var(--primary-red);
+            transform: translateX(10px);
+            background: rgba(26, 26, 26, 0.8);
+        }
+
+        .contact-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--primary-red) 0%, var(--accent-red) 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 1.5rem;
+            font-size: 1.5rem;
+            color: var(--text-white);
+            transition: all 0.5s;
+            box-shadow: 0 10px 25px rgba(229, 9, 20, 0.4);
+        }
+
+        .contact-item:hover .contact-icon {
+            transform: scale(1.1);
+            animation: glow 2s infinite;
+        }
+
+        .contact-text h4 {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+            color: var(--text-white);
+        }
+
+        .contact-text p {
+            color: var(--text-gray);
+            margin: 0;
+            font-size: 1rem;
+        }
+
+        .contact-form {
+            background: rgba(42, 42, 42, 0.7);
+            border-radius: 25px;
+            padding: 3rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            position: relative;
+            overflow: hidden;
+            transition: all 0.5s;
+        }
+
+        .contact-form::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(229, 9, 20, 0.1) 0%, transparent 50%);
+            opacity: 0;
+            transition: opacity 0.5s;
+        }
+
+        .contact-form:hover {
+            border-color: var(--primary-red);
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(229, 9, 20, 0.25);
+        }
+
+        .contact-form:hover::before {
+            opacity: 1;
+        }
+
+        .form-group {
+            margin-bottom: 2rem;
+            position: relative;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.8rem;
+            color: var(--text-white);
+            font-weight: 500;
+            font-size: 1.1rem;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 1.2rem 1.5rem;
+            background: rgba(26, 26, 26, 0.8);
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            color: var(--text-white);
+            font-size: 1rem;
+            transition: all 0.4s;
+            backdrop-filter: blur(10px);
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary-red);
+            background: rgba(26, 26, 26, 0.9);
+            box-shadow: 0 0 0 3px rgba(229, 9, 20, 0.2);
+            animation: inputFocus 0.6s ease-out;
+        }
+
+        textarea.form-control {
+            min-height: 150px;
+            resize: vertical;
+            font-family: inherit;
+        }
+
+        .submit-button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, var(--primary-red) 0%, var(--accent-red) 100%);
+            color: var(--text-white);
+            padding: 1.2rem 3rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            border: 2px solid transparent;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 10px 25px rgba(229, 9, 20, 0.3);
+            cursor: pointer;
+            width: 100%;
+        }
+
+        .submit-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.7s;
+        }
+
+        .submit-button:hover {
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 15px 35px rgba(229, 9, 20, 0.5);
+            background: linear-gradient(135deg, var(--accent-red) 0%, var(--primary-red) 100%);
+        }
+
+        .submit-button:hover::before {
+            left: 100%;
+        }
+
+        .submit-button i {
+            margin-left: 0.8rem;
+            transition: transform 0.4s;
+        }
+
+        .submit-button:hover i {
+            transform: translateX(5px) scale(1.2);
+        }
+
+        /* Дополнительные элементы */
+        .response-time {
+            display: flex;
+            align-items: center;
+            margin-top: 2rem;
+            padding: 1rem;
+            background: rgba(229, 9, 20, 0.1);
+            border-radius: 10px;
+            border-left: 4px solid var(--primary-red);
+        }
+
+        .response-time i {
+            color: var(--primary-red);
+            margin-right: 1rem;
+            font-size: 1.5rem;
+        }
+
+        .response-time p {
+            margin: 0;
+            color: var(--text-white);
+            font-size: 0.9rem;
+        }
+
+        /* Декоративные элементы */
+        .contacts-decoration {
+            position: absolute;
+            width: 400px;
+            height: 400px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(229, 9, 20, 0.15) 0%, transparent 70%);
+            filter: blur(40px);
+            z-index: 1;
+        }
+
+        .decoration-1 {
+            top: 10%;
+            left: 5%;
+            animation: float 8s ease-in-out infinite;
+        }
+
+        .decoration-2 {
+            bottom: 15%;
+            right: 5%;
+            animation: float 10s ease-in-out infinite reverse;
+        }
+
+        /* Адаптивность */
+        @media (max-width: 1024px) {
+            .contacts-container {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .contacts {
+                padding: 5rem 1rem;
+            }
+            
+            .section-title h2 {
+                font-size: 2.5rem;
+            }
+            
+            .contact-info,
+            .contact-form {
+                padding: 2rem 1.5rem;
+            }
+            
+            .contact-info h3 {
+                font-size: 1.7rem;
+            }
+            
+            .contact-item {
+                padding: 1rem;
+            }
+            
+            .contact-icon {
+                width: 50px;
+                height: 50px;
+                font-size: 1.2rem;
+                margin-right: 1rem;
+            }
+            
+            .contacts-decoration {
+                display: none;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .contact-item {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .contact-icon {
+                margin-right: 0;
+                margin-bottom: 1rem;
+            }
+            
+            .form-control {
+                padding: 1rem 1.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Секция контактов -->
+    <section id="contacts" class="contacts">
+        <!-- Декоративные элементы -->
+        <div class="contacts-decoration decoration-1"></div>
+        <div class="contacts-decoration decoration-2"></div>
+        
+        <div class="section-title">
+            <h2 class="animated fade-in-up">Контакты</h2>
+        </div>
+        
+        <div class="contacts-container">
+            <div class="contact-info animated fade-in-left">
+                <h3>Свяжитесь со мной</h3>
+                <p>Если у вас есть вопросы или вы хотите заказать услугу, свяжитесь со мной любым удобным способом. Я отвечаю быстро и всегда готов помочь вам достичь ваших игровых целей!</p>
+                
+                <div class="contact-details">
+                    <div class="contact-item">
+                        <div class="contact-icon float">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div class="contact-text">
+                            <h4>Email</h4>
+                            <p>shizzyboost@example.com</p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <div class="contact-icon float" style="animation-delay: 0.5s;">
+                            <i class="fab fa-telegram"></i>
+                        </div>
+                        <div class="contact-text">
+                            <h4>Telegram</h4>
+                            <p>@shizzyboost</p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <div class="contact-icon float" style="animation-delay: 1s;">
+                            <i class="fab fa-funpay"></i>
+                        </div>
+                        <div class="contact-text">
+                            <h4>FunPay</h4>
+                            <p>ShizzyBoost</p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <div class="contact-icon float" style="animation-delay: 1.5s;">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <div class="contact-text">
+                            <h4>Время работы</h4>
+                            <p>Ежедневно с 10:00 до 22:00</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="response-time">
+                    <i class="fas fa-bolt"></i>
+                    <p>Среднее время ответа: <strong>5-15 минут</strong> в рабочее время</p>
+                </div>
+            </div>
+            
+            <div class="contact-form animated fade-in-right">
+                <form id="contactForm">
+                    <div class="form-group">
+                        <label for="name">Ваше имя</label>
+                        <input type="text" id="name" class="form-control" placeholder="Как к вам обращаться?" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" class="form-control" placeholder="your@email.com" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="service">Интересующая услуга</label>
+                        <select id="service" class="form-control" required>
+                            <option value="">Выберите услугу</option>
+                            <option value="boosting">Бустинг аккаунтов</option>
+                            <option value="currency">Игровая валюта</option>
+                            <option value="items">Игровые предметы</option>
+                            <option value="other">Другое</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="message">Сообщение</label>
+                        <textarea id="message" class="form-control" placeholder="Опишите ваши пожелания или вопросы..." required></textarea>
+                    </div>
+                    
+                    <button type="submit" class="submit-button pulse">
+                        Отправить сообщение <i class="fas fa-paper-plane"></i>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Инициализация анимаций
+            const animatedElements = document.querySelectorAll('.animated');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const animationType = entry.target.classList[1];
+                        const delay = entry.target.style.animationDelay || '0s';
+                        entry.target.style.animationDelay = delay;
+                        entry.target.classList.add(animationType);
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { 
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            });
+            
+            animatedElements.forEach(element => {
+                observer.observe(element);
+            });
+            
+            // Обработка формы
+            const contactForm = document.getElementById('contactForm');
+            
+            contactForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const submitButton = this.querySelector('.submit-button');
+                const originalText = submitButton.innerHTML;
+                
+                // Анимация отправки
+                submitButton.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Отправка...';
+                submitButton.disabled = true;
+                
+                // Имитация отправки
+                setTimeout(() => {
+                    submitButton.innerHTML = '<i class="fas fa-check"></i> Отправлено!';
+                    submitButton.style.background = 'linear-gradient(135deg, #00ff00, #00cc00)';
+                    
+                    setTimeout(() => {
+                        submitButton.innerHTML = originalText;
+                        submitButton.disabled = false;
+                        submitButton.style.background = 'linear-gradient(135deg, var(--primary-red) 0%, var(--accent-red) 100%)';
+                        contactForm.reset();
+                    }, 2000);
+                }, 1500);
+            });
+            
+            // Интерактивные эффекты для контактных элементов
+            const contactItems = document.querySelectorAll('.contact-item');
+            
+            contactItems.forEach(item => {
+                item.addEventListener('mouseenter', function() {
+                    this.style.zIndex = '10';
+                });
+                
+                item.addEventListener('mouseleave', function() {
+                    this.style.zIndex = '1';
+                });
+            });
+        });
+    </script>
+</body>
+</html>
+
+    <!-- Футер -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-col">
+                <h4>ShizzyBoost</h4>
+                <p>Профессиональные услуги бустинга и продажи игровых ценностей на FunPay с 2020 года.</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-telegram"></i></a>
+                    <a href="#"><i class="fab fa-vk"></i></a>
+                    <a href="#"><i class="fab fa-discord"></i></a>
+                </div>
+            </div>
+            <div class="footer-col">
+                <h4>Услуги</h4>
+                <ul class="footer-links">
+                    <li><a href="#">Бустинг аккаунтов</a></li>
+                    <li><a href="#">Игровая валюта</a></li>
+                    <li><a href="#">Игровые предметы</a></li>
+                    <li><a href="#">Консультации</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Поддержка</h4>
+                <ul class="footer-links">
+                    <li><a href="#">Помощь</a></li>
+                    <li><a href="#">FAQ</a></li>
+                    <li><a href="#">Гарантии</a></li>
+                    <li><a href="#">Политика конфиденциальности</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Контакты</h4>
+                <ul class="footer-links">
+                    <li><a href="#">FunPay: ShizzyBoost</a></li>
+                    <li><a href="#">Email: shizzyboost@example.com</a></li>
+                    <li><a href="#">Telegram: @shizzyboost</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>&copy; 2023 ShizzyBoost. Все права защищены.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Анимация появления элементов при скролле
+        document.addEventListener('DOMContentLoaded', function() {
+            const animatedElements = document.querySelectorAll('.animated');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const animationType = entry.target.classList[1];
+                        entry.target.style.animationDelay = '0.3s';
+                        entry.target.classList.add(animationType);
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, {
+                threshold: 0.1
+            });
+            
+            animatedElements.forEach(element => {
+                observer.observe(element);
+            });
+            
+            // Плавная прокрутка для навигационных ссылок
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    const targetId = this.getAttribute('href');
+                    if (targetId === '#') return;
+                    
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 80,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

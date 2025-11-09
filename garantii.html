@@ -1,0 +1,1048 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Гарантии - ShizzyBoost</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-black: #0a0a0a;
+            --secondary-black: #1a1a1a;
+            --accent-black: #2a2a2a;
+            --primary-red: #e50914;
+            --secondary-red: #b2070f;
+            --accent-red: #ff2e2e;
+            --text-white: #f5f5f5;
+            --text-gray: #a0a0a0;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--primary-black);
+            color: var(--text-white);
+            overflow-x: hidden;
+        }
+
+        /* Премиум анимации */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(80px) scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        @keyframes fadeInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-80px) rotate(-5deg);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0) rotate(0);
+            }
+        }
+
+        @keyframes fadeInRight {
+            from {
+                opacity: 0;
+                transform: translateX(80px) rotate(5deg);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0) rotate(0);
+            }
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+                box-shadow: 0 0 0 0 rgba(229, 9, 20, 0.7);
+            }
+            70% {
+                transform: scale(1.05);
+                box-shadow: 0 0 0 20px rgba(229, 9, 20, 0);
+            }
+            100% {
+                transform: scale(1);
+                box-shadow: 0 0 0 0 rgba(229, 9, 20, 0);
+            }
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0) rotate(0);
+            }
+            33% {
+                transform: translateY(-15px) rotate(2deg);
+            }
+            66% {
+                transform: translateY(-8px) rotate(-1deg);
+            }
+        }
+
+        @keyframes glow {
+            0% {
+                filter: drop-shadow(0 0 5px var(--primary-red));
+            }
+            50% {
+                filter: drop-shadow(0 0 20px var(--accent-red)) drop-shadow(0 0 30px var(--accent-red));
+            }
+            100% {
+                filter: drop-shadow(0 0 5px var(--primary-red));
+            }
+        }
+
+        @keyframes gradientShift {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        @keyframes particleMove {
+            0% {
+                transform: translate(0, 0) rotate(0);
+                opacity: 1;
+            }
+            100% {
+                transform: translate(var(--move-x), var(--move-y)) rotate(var(--rotate));
+                opacity: 0;
+            }
+        }
+
+        @keyframes typewriter {
+            from {
+                width: 0;
+            }
+            to {
+                width: 100%;
+            }
+        }
+
+        @keyframes blink {
+            50% {
+                border-color: transparent;
+            }
+        }
+
+        .animated {
+            opacity: 0;
+            transition: opacity 0.8s, transform 0.8s;
+        }
+
+        .fade-in-up {
+            animation: fadeInUp 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+        }
+
+        .fade-in-left {
+            animation: fadeInLeft 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+        }
+
+        .fade-in-right {
+            animation: fadeInRight 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+        }
+
+        .pulse {
+            animation: pulse 3s infinite;
+        }
+
+        .float {
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .glow {
+            animation: glow 4s infinite;
+        }
+
+        /* Навигация */
+        header {
+            background-color: rgba(10, 10, 10, 0.9);
+            position: fixed;
+            width: 100%;
+            z-index: 1000;
+            padding: 1rem 0;
+            box-shadow: 0 2px 10px rgba(229, 9, 20, 0.3);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: var(--text-white);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+
+        .logo span {
+            color: var(--primary-red);
+        }
+
+        .logo i {
+            margin-right: 0.5rem;
+            color: var(--primary-red);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-links li {
+            margin-left: 2rem;
+        }
+
+        .nav-links a {
+            color: var(--text-white);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-red);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--primary-red);
+            transition: width 0.3s;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+
+        /* Герой секция */
+        .hero {
+            height: 70vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: 
+                radial-gradient(circle at 20% 30%, rgba(229, 9, 20, 0.2) 0%, transparent 50%),
+                radial-gradient(circle at 80% 70%, rgba(229, 9, 20, 0.15) 0%, transparent 50%),
+                linear-gradient(rgba(10, 10, 10, 0.9), rgba(10, 10, 10, 0.95)),
+                url('https://images.unsplash.com/photo-1542751371-adc38448a05e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80') no-repeat center center/cover;
+            text-align: center;
+            padding: 0 2rem;
+            overflow: hidden;
+ }
+
+        .hero-content {
+            max-width: 900px;
+            z-index: 2;
+            position: relative;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+        }
+
+        .hero h1 .typing-text {
+            display: inline-block;
+            overflow: hidden;
+            border-right: 3px solid var(--primary-red);
+            white-space: nowrap;
+            animation: typewriter 3.5s steps(40, end), blink 1s step-end infinite;
+        }
+
+        .hero h1 span {
+            color: var(--primary-red);
+            position: relative;
+        }
+
+        .hero h1 span::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, var(--primary-red), transparent);
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 2.5rem;
+            color: var(--text-gray);
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Секции */
+        section {
+            padding: 6rem 2rem;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 4rem;
+            position: relative;
+        }
+
+        .section-title h2 {
+            font-size: 3rem;
+            display: inline-block;
+            position: relative;
+            background: linear-gradient(135deg, var(--text-white) 0%, var(--primary-red) 50%, var(--accent-red) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-size: 200% 200%;
+            animation: gradientShift 6s ease infinite;
+            text-shadow: 0 0 30px rgba(229, 9, 20, 0.3);
+        }
+
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 120px;
+            height: 4px;
+            background: linear-gradient(90deg, transparent, var(--primary-red), transparent);
+            border-radius: 2px;
+            box-shadow: 0 0 15px rgba(229, 9, 20, 0.5);
+        }
+
+        /* Секция гарантий */
+        .guarantees {
+            background: 
+                radial-gradient(circle at 10% 20%, rgba(229, 9, 20, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 90% 80%, rgba(229, 9, 20, 0.1) 0%, transparent 50%),
+                linear-gradient(135deg, var(--secondary-black) 0%, var(--primary-black) 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .guarantees-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 3rem;
+        }
+
+        .guarantee-card {
+            background: rgba(42, 42, 42, 0.7);
+            border-radius: 25px;
+            padding: 3rem 2.5rem;
+            text-align: center;
+            transition: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            position: relative;
+            overflow: hidden;
+            transform-style: preserve-3d;
+            perspective: 1000px;
+        }
+
+        .guarantee-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(229, 9, 20, 0.1) 0%, transparent 50%);
+            opacity: 0;
+            transition: opacity 0.6s;
+        }
+
+        .guarantee-card::after {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(45deg, var(--primary-red), transparent, var(--accent-red), transparent, var(--primary-red));
+            background-size: 400% 400%;
+            border-radius: 27px;
+            z-index: -1;
+            opacity: 0;
+            transition: opacity 0.6s;
+            animation: gradientShift 4s ease infinite;
+        }
+
+        .guarantee-card:hover {
+            transform: translateY(-15px) rotateX(5deg) scale(1.03);
+            border-color: var(--primary-red);
+            box-shadow: 0 25px 50px rgba(229, 9, 20, 0.3);
+        }
+
+        .guarantee-card:hover::before {
+            opacity: 1;
+        }
+
+        .guarantee-card:hover::after {
+            opacity: 1;
+        }
+
+        .guarantee-icon {
+            font-size: 4rem;
+            color: var(--primary-red);
+            margin-bottom: 2rem;
+            transition: all 0.6s;
+            display: inline-block;
+        }
+
+        .guarantee-card:hover .guarantee-icon {
+            transform: scale(1.2) rotate(10deg);
+            animation: glow 2s infinite;
+        }
+
+        .guarantee-card h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            color: var(--text-white);
+            position: relative;
+            display: inline-block;
+        }
+
+        .guarantee-card h3::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 50px;
+            height: 2px;
+            background: var(--primary-red);
+            transition: width 0.4s;
+        }
+
+        .guarantee-card:hover h3::after {
+            width: 100px;
+        }
+
+        .guarantee-card p {
+            color: var(--text-gray);
+            line-height: 1.7;
+            font-size: 1.1rem;
+        }
+
+        /* Секция процесса */
+        .process {
+            background: var(--primary-black);
+            position: relative;
+        }
+
+        .process-steps {
+            max-width: 1000px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .process-step {
+            display: flex;
+            align-items: center;
+            margin-bottom: 4rem;
+            position: relative;
+        }
+
+        .process-step:nth-child(even) {
+            flex-direction: row-reverse;
+        }
+
+        .step-number {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, var(--primary-red) 0%, var(--accent-red) 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--text-white);
+            box-shadow: 0 10px 30px rgba(229, 9, 20, 0.4);
+            position: relative;
+            z-index: 2;
+            flex-shrink: 0;
+        }
+
+        .step-content {
+            background: rgba(42, 42, 42, 0.7);
+            border-radius: 20px;
+            padding: 2.5rem;
+            margin: 0 2rem;
+            flex: 1;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(15px);
+            transition: all 0.4s;
+        }
+
+        .process-step:hover .step-content {
+            border-color: var(--primary-red);
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(229, 9, 20, 0.2);
+        }
+
+        .step-content h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--text-white);
+        }
+
+        .step-content p {
+            color: var(--text-gray);
+            line-height: 1.7;
+        }
+
+        /* Секция обещаний */
+        .promises {
+            background: 
+                radial-gradient(circle at 20% 30%, rgba(229, 9, 20, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 80% 70%, rgba(229, 9, 20, 0.1) 0%, transparent 50%),
+                linear-gradient(135deg, var(--secondary-black) 0%, var(--primary-black) 100%);
+            position: relative;
+        }
+
+        .promises-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .promise-item {
+            background: rgba(42, 42, 42, 0.7);
+            border-radius: 20px;
+            padding: 2.5rem;
+            transition: all 0.4s;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(15px);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .promise-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: linear-gradient(to bottom, var(--primary-red), var(--accent-red));
+            opacity: 0;
+            transition: opacity 0.4s;
+        }
+
+        .promise-item:hover {
+            border-color: var(--primary-red);
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(229, 9, 20, 0.25);
+        }
+
+        .promise-item:hover::before {
+            opacity: 1;
+        }
+
+        .promise-icon {
+            font-size: 2.5rem;
+            color: var(--primary-red);
+            margin-bottom: 1.5rem;
+        }
+
+        .promise-item h3 {
+            font-size: 1.4rem;
+            margin-bottom: 1rem;
+            color: var(--text-white);
+        }
+
+        .promise-item p {
+            color: var(--text-gray);
+            line-height: 1.7;
+        }
+
+        /* Футер */
+        footer {
+            background-color: var(--secondary-black);
+            padding: 4rem 2rem 2rem;
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+        }
+
+        .footer-col h4 {
+            font-size: 1.2rem;
+            margin-bottom: 1.5rem;
+            color: var(--primary-red);
+            position: relative;
+        }
+
+        .footer-col h4::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 40px;
+            height: 2px;
+            background-color: var(--primary-red);
+        }
+
+        .footer-col p {
+            color: var(--text-gray);
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-links a {
+            color: var(--text-gray);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: var(--primary-red);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: var(--accent-black);
+            border-radius: 50%;
+            color: var(--text-white);
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .social-links a:hover {
+            background-color: var(--primary-red);
+            transform: translateY(-5px);
+        }
+
+        .copyright {
+            text-align: center;
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid #333;
+            color: var(--text-gray);
+            font-size: 0.9rem;
+        }
+
+        /* Декоративные элементы */
+        .decoration {
+            position: absolute;
+            width: 400px;
+            height: 400px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(229, 9, 20, 0.15) 0%, transparent 70%);
+            filter: blur(40px);
+            z-index: 1;
+        }
+
+        .decoration-1 {
+            top: 10%;
+            left: 5%;
+            animation: float 8s ease-in-out infinite;
+        }
+
+        .decoration-2 {
+            bottom: 15%;
+            right: 5%;
+            animation: float 10s ease-in-out infinite reverse;
+        }
+
+        /* Адаптивность */
+        @media (max-width: 1024px) {
+            .guarantees-container,
+            .promises-container {
+                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+                gap: 2rem;
+            }
+            
+            .process-step {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .process-step:nth-child(even) {
+                flex-direction: column;
+            }
+            
+            .step-content {
+                margin: 2rem 0 0 0;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero p {
+                font-size: 1.1rem;
+            }
+            
+            section {
+                padding: 4rem 1rem;
+            }
+            
+            .section-title h2 {
+                font-size: 2.2rem;
+            }
+            
+            .guarantee-card,
+            .promise-item {
+                padding: 2rem 1.5rem;
+            }
+            
+            .footer-container {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .decoration {
+                display: none;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .footer-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .guarantees-container,
+            .promises-container {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Навигация -->
+    <header>
+        <div class="nav-container">
+            <a href="index.html" class="logo"><i class="fas fa-rocket"></i>Shizzy<span>Boost</span></a>
+            <ul class="nav-links">
+                <li><a href="index.html">Главная</a></li>
+                <li><a href="index.html#services">Услуги</a></li>
+                <li><a href="faq.html">FAQ</a></li>
+                <li><a href="guarantees.html" class="active">Гарантии</a></li>
+                <li><a href="index.html#contacts">Контакты</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <!-- Герой секция -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1 class="animated fade-in-up">
+                <span class="typing-text">Наши гарантии</span>
+            </h1>
+            <p class="animated fade-in-up" style="animation-delay: 0.3s;">
+                Ваша безопасность и удовлетворение - наш главный приоритет. Узнайте о гарантиях, которые мы предоставляем на все услуги.
+            </p>
+        </div>
+    </section>
+
+    <!-- Секция гарантий -->
+    <section class="guarantees">
+        <div class="decoration decoration-1"></div>
+        <div class="decoration decoration-2"></div>
+        
+        <div class="section-title">
+            <h2 class="animated fade-in-up">Наши гарантии</h2>
+        </div>
+        
+        <div class="guarantees-container">
+            <div class="guarantee-card animated fade-in-left">
+                <div class="guarantee-icon float">
+                    <i class="fas fa-shield-alt"></i>
+                </div>
+                <h3>100% Безопасность</h3>
+                <p>Все операции проводятся с максимальной безопасностью. Мы используем защищенные методы доступа и двухфакторную аутентификацию для защиты вашего аккаунта.</p>
+            </div>
+            
+            <div class="guarantee-card animated fade-in-up">
+                <div class="guarantee-icon float" style="animation-delay: 0.5s;">
+                    <i class="fas fa-clock"></i>
+                </div>
+                <h3>Соблюдение сроков</h3>
+                <p>Мы гарантируем выполнение заказов в оговоренные сроки. В случае задержки по нашей вине - предоставляем компенсацию.</p>
+            </div>
+            
+            <div class="guarantee-card animated fade-in-right">
+                <div class="guarantee-icon float" style="animation-delay: 1s;">
+                    <i class="fas fa-lock"></i>
+                </div>
+                <h3>Конфиденциальность</h3>
+                <p>Все данные клиентов строго конфиденциальны. Мы не передаем информацию третьим лицам и удаляем ее после выполнения заказа.</p>
+            </div>
+            
+            <div class="guarantee-card animated fade-in-left">
+                <div class="guarantee-icon float">
+                    <i class="fas fa-medal"></i>
+                </div>
+                <h3>Качество услуг</h3>
+                <p>Мы гарантируем высокое качество всех предоставляемых услуг. Все работы выполняются профессиональными игроками вручную.</p>
+            </div>
+            
+            <div class="guarantee-card animated fade-in-up">
+                <div class="guarantee-icon float" style="animation-delay: 0.5s;">
+                    <i class="fas fa-sync-alt"></i>
+                </div>
+                <h3>Возврат средств</h3>
+                <p>Возврат средств осуществляется в случае невыполнения заказа в срок по нашей вине или при технических проблемах.</p>
+            </div>
+            
+            <div class="guarantee-card animated fade-in-right">
+                <div class="guarantee-icon float" style="animation-delay: 1s;">
+                    <i class="fas fa-headset"></i>
+                </div>
+                <h3>Поддержка 24/7</h3>
+                <p>Наша служба поддержки всегда на связи и готова помочь с любыми вопросами и проблемами, связанными с заказом.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Секция процесса -->
+    <section class="process">
+        <div class="section-title">
+            <h2 class="animated fade-in-up">Как мы обеспечиваем гарантии</h2>
+        </div>
+        
+        <div class="process-steps">
+            <div class="process-step animated fade-in-left">
+                <div class="step-number pulse">1</div>
+                <div class="step-content">
+                    <h3>Безопасное подключение</h3>
+                    <p>Используем VPN и защищенные протоколы для доступа к аккаунтам. Все действия выполняются с IP-адресов, соответствующих вашему региону.</p>
+                </div>
+            </div>
+            
+            <div class="process-step animated fade-in-right">
+                <div class="step-number pulse">2</div>
+                <div class="step-content">
+                    <h3>Ручное выполнение</h3>
+                    <p>Все услуги выполняются вручную профессиональными игроками. Мы не используем ботов или программы, нарушающие правила игр.</p>
+                </div>
+            </div>
+            
+            <div class="process-step animated fade-in-left">
+                <div class="step-number pulse">3</div>
+                <div class="step-content">
+                    <h3>Постоянный мониторинг</h3>
+                    <p>Мы отслеживаем процесс выполнения заказа и оперативно реагируем на любые возникающие проблемы или вопросы.</p>
+                </div>
+            </div>
+            
+            <div class="process-step animated fade-in-right">
+                <div class="step-number pulse">4</div>
+                <div class="step-content">
+                    <h3>Финальная проверка</h3>
+                    <p>Перед сдачей заказа проводим тщательную проверку качества выполнения и соответствия всем требованиям клиента.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Секция обещаний -->
+    <section class="promises">
+        <div class="section-title">
+            <h2 class="animated fade-in-up">Наши обещания</h2>
+        </div>
+        
+        <div class="promises-container">
+            <div class="promise-item animated fade-in-up">
+                <div class="promise-icon">
+                    <i class="fas fa-user-shield"></i>
+                </div>
+                <h3>Защита аккаунта</h3>
+                <p>Мы гарантируем полную безопасность вашего игрового аккаунта и соблюдение всех мер предосторожности.</p>
+            </div>
+            
+            <div class="promise-item animated fade-in-up" style="animation-delay: 0.2s;">
+                <div class="promise-icon">
+                    <i class="fas fa-gem"></i>
+                </div>
+                <h3>Премиум качество</h3>
+                <p>Все услуги выполняются на высшем уровне качества профессиональными игроками с многолетним опытом.</p>
+            </div>
+            
+            <div class="promise-item animated fade-in-up" style="animation-delay: 0.4s;">
+                <div class="promise-icon">
+                    <i class="fas fa-handshake"></i>
+                </div>
+                <h3>Честность и прозрачность</h3>
+                <p>Мы ведем деятельность максимально прозрачно и всегда честны с нашими клиентами.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Футер -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-col">
+                <h4>ShizzyBoost</h4>
+                <p>Профессиональные услуги бустинга и продажи игровых ценностей на FunPay с 2020 года.</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-telegram"></i></a>
+                    <a href="#"><i class="fab fa-vk"></i></a>
+                    <a href="#"><i class="fab fa-discord"></i></a>
+                </div>
+            </div>
+            <div class="footer-col">
+                <h4>Услуги</h4>
+                <ul class="footer-links">
+                    <li><a href="index.html#services">Бустинг аккаунтов</a></li>
+                    <li><a href="index.html#services">Игровая валюта</a></li>
+                    <li><a href="index.html#services">Игровые предметы</a></li>
+                    <li><a href="index.html#services">Консультации</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Поддержка</h4>
+                <ul class="footer-links">
+                    <li><a href="faq.html">FAQ</a></li>
+                    <li><a href="guarantees.html">Гарантии</a></li>
+                    <li><a href="index.html#contacts">Контакты</a></li>
+                    <li><a href="#">Политика конфиденциальности</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Контакты</h4>
+                <ul class="footer-links">
+                    <li><a href="#">FunPay: ShizzyBoost</a></li>
+                    <li><a href="#">Email: shizzyboost@example.com</a></li>
+                    <li><a href="#">Telegram: @shizzyboost</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>&copy; 2023 ShizzyBoost. Все права защищены.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Инициализация анимаций
+            const animatedElements = document.querySelectorAll('.animated');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const animationType = entry.target.classList[1];
+                        const delay = entry.target.style.animationDelay || '0s';
+                        entry.target.style.animationDelay = delay;
+                        entry.target.classList.add(animationType);
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { 
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            });
+            
+            animatedElements.forEach(element => {
+                observer.observe(element);
+            });
+            
+            // Интерактивные эффекты для карточек
+            const guaranteeCards = document.querySelectorAll('.guarantee-card');
+            const promiseItems = document.querySelectorAll('.promise-item');
+            
+            guaranteeCards.forEach(card => {
+                card.addEventListener('mouseenter', function() {
+                    this.style.zIndex = '10';
+                });
+                
+                card.addEventListener('mouseleave', function() {
+                    this.style.zIndex = '2';
+                });
+            });
+            
+            promiseItems.forEach(item => {
+                item.addEventListener('mouseenter', function() {
+                    this.style.zIndex = '10';
+                });
+                
+                item.addEventListener('mouseleave', function() {
+                    this.style.zIndex = '2';
+                });
+            });
+            
+            // Плавная прокрутка для навигационных ссылок
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    const targetId = this.getAttribute('href');
+                    if (targetId === '#') return;
+                    
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 100,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
